@@ -17,4 +17,24 @@ class HomeController extends AbstractController
             
         ]);
     }
+
+    /**
+     * @Route("/licence", name="licence")
+     */
+    public function licence()
+    {
+        return $this->render('home/licence.html.twig', [
+            
+        ]);
+    }
+
+    /**
+     * @Route("/privacy", name="privacy")
+     */
+    public function privacy()
+    {
+        return $this->render('home/privacy.html.twig', [
+            
+        ]);
+    }
 }

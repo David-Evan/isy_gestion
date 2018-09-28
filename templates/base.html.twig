@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" >
         
+        <base href="{{ url('index') }}">
         <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -31,6 +32,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
         <link rel="stylesheet" type="text/css" href="css/default-default-white.css" id="dev-css">
+        <link rel="stylesheet" href="css/custom.css">
         {% block stylesheets %}{% endblock %}
         <!-- ./css styles -->                                
         
@@ -41,6 +43,7 @@
         <!-- javascripts -->
         <script type="text/javascript" src="js/plugins/modernizr/modernizr.js"></script>
         <!-- ./javascripts -->
+        <style>.dev-page{visibility: hidden;}</style>
     </head>
     <body>
         <!-- page wrapper -->

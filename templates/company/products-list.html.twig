@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Gestion des Produits{% endblock %}
+
+{% block body %}
+    <!-- page title -->
+    <div class="page-title">
+        <h1>Gestion des produits &amp; services</h1>
+        <p>Vous pouvez facilement ajouter les produits proposés ou les forfait d'interventions proposé par votre société pour accélérer la création et la modification de vos devis.</p>
+        
+        <ul class="breadcrumb">
+            <li><a href="{{path('company')}}">Gestion d'entreprise</a></li>
+            <li>Gestion des produits</li>
+        </ul>
+    </div>                        
+    <!-- ./page title -->
+    <div class="wrapper wrapper-white">
+        <div class="page-subtitle">
+            <p><a href="#" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter un produit</a></p>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-sortable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Prix H.T (€)</th>
+                        <th>T.V.A</th>
+                        <th>Unité</th>
+                        <th>Remise max.</th>
+                    </tr>
+                </thead>                               
+                <tbody>
+                    {% for Product in Products %}
+                    <tr>
+                        <td>{{Product.id}}</td>
+                        <td><strong>{{Product.name}}</strong></td>
+                        <td>{{Product.description}}</td>
+                        <td>{{Product.price}} €</td>
+                        <td>{{Product.tax}} %</td>
+                        <td>{{Product.units}}</td>
+                        <td>{% if (Product.maxDiscount is null or Product.maxDiscount == 0) %} N/A {% else %}{{Product.maxDiscount}} %{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}
+<script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/plugins/sortable/sortable.min.js"></script>
+{% endblock %}

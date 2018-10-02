@@ -27,7 +27,7 @@ class QuotationProducts
     private $description;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="float")
      */
     private $tax;
 
@@ -37,17 +37,17 @@ class QuotationProducts
     private $units;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $discount;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $quantity;
 
@@ -86,18 +86,6 @@ class QuotationProducts
         return $this;
     }
 
-    public function getTax(): ?int
-    {
-        return $this->tax;
-    }
-
-    public function setTax(int $tax): self
-    {
-        $this->tax = $tax;
-
-        return $this;
-    }
-
     public function getUnits(): ?string
     {
         return $this->units;
@@ -110,42 +98,6 @@ class QuotationProducts
         return $this;
     }
 
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getDiscount(): ?int
-    {
-        return $this->discount;
-    }
-
-    public function setDiscount(?int $discount): self
-    {
-        $this->discount = $discount;
-
-        return $this;
-    }
-
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
     public function getQuotation(): ?Quotation
     {
         return $this->quotation;
@@ -154,6 +106,54 @@ class QuotationProducts
     public function setQuotation(?Quotation $quotation): self
     {
         $this->quotation = $quotation;
+
+        return $this;
+    }
+
+    public function getTax(): ?float
+    {
+        return $this->tax;
+    }
+
+    public function setTax(float $tax): self
+    {
+        $this->tax = $tax;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?float
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(float $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

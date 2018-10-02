@@ -26,12 +26,21 @@ class Event
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreate;
+
    /**
     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
     * @ORM\JoinColumn(nullable=false)
     */
     private $customer;
 
+    public function __construct(){
+        $this->setDateCreate(new \DateTime());
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +78,18 @@ class Event
     public function setCustomer(?Customer $customer): self
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getDateCreate(): ?\DateTimeInterface
+    {
+        return $this->dateCreate;
+    }
+
+    public function setDateCreate(\DateTimeInterface $dateCreate): self
+    {
+        $this->dateCreate = $dateCreate;
 
         return $this;
     }

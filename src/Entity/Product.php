@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product
 {
@@ -20,6 +21,11 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $code;
 
     /**
      * @ORM\Column(type="string", length=1500, nullable=true)
@@ -27,7 +33,7 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="float")
      */
     private $tax;
 
@@ -37,19 +43,36 @@ class Product
     private $units;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $price;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateUpdate;
+    
+    /**
+     * @ORM\Column(type="float", nullable=true)
      */
     private $maxDiscount;
 
+    public function __construct(){
+        $this->setDateCreate(new \DateTime());
+    }
+    
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\PreUpdate
      */
-    private $quantity;
+    public function updateDate()
+    {
+        $this->setDateUpdate(new \Datetime());
+    }
 
     public function getId(): ?int
     {
@@ -80,18 +103,6 @@ class Product
         return $this;
     }
 
-    public function getTax(): ?int
-    {
-        return $this->tax;
-    }
-
-    public function setTax(int $tax): self
-    {
-        $this->tax = $tax;
-
-        return $this;
-    }
-
     public function getUnits(): ?string
     {
         return $this->units;
@@ -104,38 +115,74 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getTax(): ?float
+    {
+        return $this->tax;
+    }
+
+    public function setTax(float $tax): self
+    {
+        $this->tax = $tax;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
         return $this;
     }
 
-    public function getMaxDiscount(): ?int
+    public function getMaxDiscount(): ?float
     {
         return $this->maxDiscount;
     }
 
-    public function setMaxDiscount(?int $maxDiscount): self
+    public function setMaxDiscount(?float $maxDiscount): self
     {
         $this->maxDiscount = $maxDiscount;
 
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getCode(): ?string
     {
-        return $this->quantity;
+        return $this->code;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setCode(string $code): self
     {
-        $this->quantity = $quantity;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getDateCreate(): ?\DateTimeInterface
+    {
+        return $this->dateCreate;
+    }
+
+    public function setDateCreate(\DateTimeInterface $dateCreate): self
+    {
+        $this->dateCreate = $dateCreate;
+
+        return $this;
+    }
+
+    public function getDateUpdate(): ?\DateTimeInterface
+    {
+        return $this->dateUpdate;
+    }
+
+    public function setDateUpdate(\DateTimeInterface $dateUpdate): self
+    {
+        $this->dateUpdate = $dateUpdate;
 
         return $this;
     }

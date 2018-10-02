@@ -17,33 +17,37 @@
         
         <ul class="dev-page-navigation">
             <li class="title">Navigation</li>
-            <li class="active">
+            <li>
                 <a href="#"><i class="fa fa-desktop"></i> <span>Tableau de Bord</span></a>
             </li>                      
             <li>
-                <a href="#"><i class="fa fa-users"></i> <span>Gestion commerciale</span></a>
+                <a href="#"><i class="fas fa-comment-dollar"></i> <span>Gestion commerciale</span></a>
                 <ul>                               
-                    <li><a href="#">Gestion des Affaires</a></li>                                
-                    <li><a href="#">Gestion Clientèle</a></li>
-                    <li><a href="#">Gestion Prospect</a></li>
-                    <li><a href="#">Carnet d'adresse</a></li>
+                    <li><a href="#"></i>Gestion des Affaires</a></li>                                
+                    <li><a href="#"></i>Gestion Clientèle</a></li>
+                    <li><a href="#"></i>Gestion des Prospects</a></li>
+                    <li><a href="#"></i>Carnet d'adresse</a></li>
                 </ul>
             </li>                        
             <li>
                 <a href="#"><i class="fas fa-file-invoice"></i> <span>Facturation</span> </a>
                 <ul>
-                    <li><a href="#">Factures en attente<span class="label label-danger">+2</span> </a></li>
-                    <li><a href="#">Factures archivés</a></li>
+                    <li><a href="#"></i>Factures en attente<span class="label label-danger">+2</span> </a></li>
+                    <li><a href="#"></i>Factures archivés</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-cogs"></i> <span>Gestion Entreprise</span></a>
+            <li class="active">
+                <a href="#"><i class="fa fa-cogs"></i><span>Gestion Entreprise</span></a>
+                <ul>
+                    <li class="active"><a href="{{ path('company_products_list') }}">Gestion des produits &amp; services</a></li>
+                    <li><a href="#">Paramètres</a></li>
+                </ul>
             </li>
 
             <li>
                 <a href="#"><i class="fa fa-users"></i> <span>Développement</span></a>
                 <ul>                               
-                    <li><a href="{{ path('crm_client') }}">Afficher client</a></li>                                
+                    <li><a href="{{ path('crm_customers') }}">Template client</a></li>                                
                 </ul>
             </li>  
         </ul>

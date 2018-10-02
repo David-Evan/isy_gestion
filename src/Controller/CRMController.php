@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Product;
 
 class CRMController extends AbstractController
 {
@@ -12,17 +13,18 @@ class CRMController extends AbstractController
      */
     public function index()
     {
+
         return $this->render('CRM/index.html.twig', [
             
         ]);
     }
 
     /**
-     * @Route("/crm/client", name="crm_client")
+     * @Route("/crm/customers", name="crm_customers")
      */
-    public function client()
+    public function clients()
     {
-        return $this->render('CRM/client.html.twig', [
+        return $this->render('CRM/customers.html.twig', [
             
         ]);
     }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuotationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Quotation
 {
@@ -27,7 +28,7 @@ class Quotation
     private $dateCreate;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateUpdate;
 
@@ -36,6 +37,18 @@ class Quotation
     * @ORM\JoinColumn(nullable=false)
     */
     private $deal;
+
+    public function __construct(){
+        $this->setDateCreate(new \DateTime());
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setDateUpdate(new \Datetime());
+    }
 
     public function getId(): ?int
     {

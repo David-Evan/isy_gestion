@@ -29,10 +29,10 @@
         <!-- ./meta section -->
         
         <!-- css styles -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
         <link rel="stylesheet" type="text/css" href="css/default-default-white.css" id="dev-css">
         <link rel="stylesheet" href="css/custom.css">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
         <!-- ./css styles -->                                
         
@@ -68,7 +68,7 @@
                         <!-- Copyright -->
                         <div class="copyright">
                             <div class="pull-left">
-                                &copy; {{ "now"|date("Y") }} <strong>ISY-Gestion</strong>. Tous droits réservés
+                                &copy; {{ "now"|date("Y") }}<strong><a href="{{ path ('licence')}}">ISY-Gestion</a></strong>Designed with ❤ by <a href="https://www.david-evan.fr" target="_blank">David Evan</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ path ('licence')}}">Licence d'utilisation</a> / <a href="{{ path ('privacy')}}">Politique de confidentialité</a>

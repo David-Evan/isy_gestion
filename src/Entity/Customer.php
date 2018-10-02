@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Customer
 {
@@ -49,7 +50,7 @@ class Customer
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isProspectiveCustomer;
+    private $isProspectiveCustomer = true;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -62,7 +63,7 @@ class Customer
     private $dateCreate;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateUpdate;
 
@@ -71,6 +72,18 @@ class Customer
     * @ORM\JoinColumn(nullable=false)
     */
     private $customer;
+
+    public function __construct(){
+        $this->setDateCreate(new \DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setDateUpdate(new \Datetime());
+    }
 
     public function getId(): ?int
     {

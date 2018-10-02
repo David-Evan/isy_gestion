@@ -29,13 +29,27 @@ class Invoice
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $reference;
+    private $paymentReference;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $datePayment;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreate;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Quotation", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $quotation;
+    
+    public function __construct(){
+        $this->setDateCreate(new \DateTime());
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +100,42 @@ class Invoice
     public function setQuotation(Quotation $quotation): self
     {
         $this->quotation = $quotation;
+
+        return $this;
+    }
+
+    public function getPaymentReference(): ?string
+    {
+        return $this->paymentReference;
+    }
+
+    public function setPaymentReference(string $paymentReference): self
+    {
+        $this->paymentReference = $paymentReference;
+
+        return $this;
+    }
+
+    public function getDateCreate(): ?\DateTimeInterface
+    {
+        return $this->dateCreate;
+    }
+
+    public function setDateCreate(\DateTimeInterface $dateCreate): self
+    {
+        $this->dateCreate = $dateCreate;
+
+        return $this;
+    }
+
+    public function getDatePayment(): ?\DateTimeInterface
+    {
+        return $this->datePayment;
+    }
+
+    public function setDatePayment(\DateTimeInterface $datePayment): self
+    {
+        $this->datePayment = $datePayment;
 
         return $this;
     }

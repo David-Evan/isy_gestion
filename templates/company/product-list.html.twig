@@ -10,13 +10,13 @@
         
         <ul class="breadcrumb">
             <li><a href="{{path('company')}}">Gestion d'entreprise</a></li>
-            <li>Gestion des produits</li>
+            <li>Gestion des produits &amp; services</li>
         </ul>
     </div>                        
     <!-- ./page title -->
     <div class="wrapper wrapper-white">
         <div class="page-subtitle">
-            <p><a href="#" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter un produit</a></p>
+            <p><a href="{{path('company_product_add')}}" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter un produit</a></p>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-sortable">
@@ -29,18 +29,20 @@
                         <th>T.V.A</th>
                         <th>Unité</th>
                         <th>Remise max.</th>
+                        <th>Action</th>
                     </tr>
                 </thead>                               
                 <tbody>
                     {% for Product in Products %}
                     <tr>
-                        <td>{{Product.id}}</td>
+                        <td>{{Product.code}}</td>
                         <td><strong>{{Product.name}}</strong></td>
-                        <td>{{Product.description}}</td>
+                        <td>{{Product.description|nl2br}}</td>
                         <td>{{Product.price}} €</td>
                         <td>{{Product.tax}} %</td>
                         <td>{{Product.units}}</td>
                         <td>{% if (Product.maxDiscount is null or Product.maxDiscount == 0) %} N/A {% else %}{{Product.maxDiscount}} %{% endif %}</td>
+                        <td><a href="{{ path('company_product_update', {'id': Product.id}) }}" class="btn btn-primary btn-xs btn-table-inline"><i class="far fa-edit"></i></a> &nbsp; <a class="btn btn-danger btn-xs btn-table-inline"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

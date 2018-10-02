@@ -48,7 +48,6 @@
     <body>
         <!-- page wrapper -->
         <div class="dev-page">
-            
             <!-- page header -->    
             {% include "_header.html.twig" %}
             <!-- ./page header -->
@@ -64,6 +63,18 @@
                 <div class="dev-page-content">                
                     <!-- page content container -->
                     <div class="container">
+                        {# Display every flash message available #}
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="flash-{{ label }} alert alert-{{ label }}" role="alert">
+                                    <strong>{{ message }}</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Fermer">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
                         {% block body %}{% endblock %}    
                         <!-- Copyright -->
                         <div class="copyright">

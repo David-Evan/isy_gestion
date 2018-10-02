@@ -39,9 +39,9 @@
                         <td><strong>{{Product.name}}</strong></td>
                         <td>{{Product.description|nl2br}}</td>
                         <td>{{Product.price}} €</td>
-                        <td>{{Product.tax}} %</td>
+                        <td>{{Product.tax}}%</td>
                         <td>{{Product.units}}</td>
-                        <td>{% if (Product.maxDiscount is null or Product.maxDiscount == 0) %} N/A {% else %}{{Product.maxDiscount}} %{% endif %}</td>
+                        <td>{% if (Product.maxDiscount is null or Product.maxDiscount == 0) %} N/A {% else %}{{Product.maxDiscount}}%{% endif %}</td>
                         <td><a href="{{ path('company_product_update', {'id': Product.id}) }}" class="btn btn-primary btn-xs btn-table-inline"><i class="far fa-edit"></i></a> &nbsp; <a class="btn btn-danger btn-xs btn-table-inline"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                     {% endfor %}

@@ -25,6 +25,7 @@ class CompanyController extends AbstractController
      * @Route("/company/products", name="company_product_list", methods={"GET","HEAD"})
      */
     public function listProduct(){
+
         $products = $this->getDoctrine()
                           ->getRepository(Product::class)
                           ->findAll();
@@ -40,26 +41,23 @@ class CompanyController extends AbstractController
     public function addProduct(Request $request){
 
         $product = new Product();
-        $form =  $this->createForm(ProductType::class, $product);
-
-        $form->handleRequest($request);
+        $form =  $this->createForm(ProductType::class, $product)
+                      ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-    
-            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager = $this->getDoctrine()
+                                ->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash(
-                'success',
-                'Votre produit a été ajouté !'
-            );
+            $this->addFlash('success','Votre produit a été modifé !');
 
             return $this->redirectToRoute('company_product_list');
         }
 
         return $this->render('company/product-add.html.twig', [
-            'AddProductForm' => $form->createView(),  
+                     'AddProductForm' => $form->createView(),  
         ]);
     }
 
@@ -68,21 +66,18 @@ class CompanyController extends AbstractController
      */
     public function updateProduct(Request $request, Product $product){
         
-        $form =  $this->createForm(ProductType::class, $product);
-
-        $form->handleRequest($request);
+        $form =  $this->createForm(ProductType::class, $product)
+                      ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
     
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()
+                                  ->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash(
-                'success',
-                'Votre produit a été modifé !'
-            );
-
+            $this->addFlash('success','Votre produit a été modifé !');
+            
             return $this->redirectToRoute('company_product_list');
         }
 

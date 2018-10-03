@@ -51,13 +51,13 @@ class CompanyManagementController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash('success','Votre produit a été modifé !');
+            $this->addFlash('success','Votre produit a bien été ajouté !');
 
             return $this->redirectToRoute('company_product_list');
         }
 
         return $this->render('company/product-add.html.twig', [
-                     'AddProductForm' => $form->createView(),  
+                            'AddProductForm' => $form->createView(),  
         ]);
     }
 
@@ -76,7 +76,7 @@ class CompanyManagementController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash('success','Votre produit a été modifé !');
+            $this->addFlash('success','Votre produit a bien été modifé !');
             
             return $this->redirectToRoute('company_product_list');
         }
@@ -84,5 +84,19 @@ class CompanyManagementController extends AbstractController
         return $this->render('company/product-update.html.twig', [
             'UpdateProductForm' => $form->createView(),  
         ]);
+    }
+
+    /**
+     * @Route("/company/products/delete/{id}", name="company_product_delete", requirements={"id"="\d+"})
+     */
+    public function deleteProduct(Product $product){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        $this->addFlash('info','Le produit a bien été supprimé.');
+        
+        return $this->redirectToRoute('company_product_list');
     }
 }

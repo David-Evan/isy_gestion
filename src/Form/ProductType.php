@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Component\Form\Extension\Core\Type\{TextType, SubmitType, NumberType, MoneyType}; 
+use Symfony\Component\Form\Extension\Core\Type\{TextType, TextareaType, SubmitType, NumberType, IntegerType}; 
 
 
 class ProductType extends AbstractType
@@ -17,12 +17,12 @@ class ProductType extends AbstractType
         $builder
             ->add('name')
             ->add('code')
-            ->add('description', TextType::class, ['required' => false])
-            ->add('tax')
+            ->add('description', TextareaType::class, ['required' => false])
+            ->add('tax', NumberType::class, ['scale' => 2, 'attr' => ['step' => 0.01]])
             ->add('units')
-            ->add('price')
+            ->add('price', NumberType::class, ['scale' => 2, 'attr' => ['step' => 0.01]])
             ->add('maxDiscount', NumberType::class, ['required' => false])
-            ->add('Enregistrer', SubmitType::class)
+            ->add('submit', SubmitType::class)
         ;
     }
 

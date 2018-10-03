@@ -42,7 +42,9 @@
                         <td>{{Product.tax}}%</td>
                         <td>{{Product.units}}</td>
                         <td>{% if (Product.maxDiscount is null or Product.maxDiscount == 0) %} N/A {% else %}{{Product.maxDiscount}}%{% endif %}</td>
-                        <td><a href="{{ path('company_product_update', {'id': Product.id}) }}" class="btn btn-primary btn-xs btn-table-inline"><i class="far fa-edit"></i></a> &nbsp; <a class="btn btn-danger btn-xs btn-table-inline"><i class="far fa-trash-alt"></i></a></td>
+                        <td>
+                            <a href="{{ path('company_product_update', {'id': Product.id}) }}" class="btn btn-primary btn-xs btn-table-inline" alt="Modifier"><i class="far fa-edit"></i></a> &nbsp; 
+                            <a href="{{ path('company_product_delete', {'id': Product.id}) }}" class="btn btn-danger btn-xs btn-table-inline" alt="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

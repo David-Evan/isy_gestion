@@ -1,0 +1,108 @@
+{{ form_start(form) }}
+
+{# Forms errors #}
+{{ form_errors(form) }}
+
+{# Row Start #}
+<div class="row">
+    {# Name #}
+    <div class="col-md-7">
+        <div class="form-group">
+            {{ form_label(form.name, "Nom du produit / service") }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            <small class="text-muted">
+                Obligatoire.<br>
+                {{ form_errors(form.name) }}
+            </small>
+        </div>
+    </div>
+
+    {# Code #}
+    <div class="col-md-5">
+        <div class="form-group">
+            {{ form_label(form.code, "Code produit") }}
+            {{ form_widget(form.code, {'attr': {'class': 'form-control'}}) }}
+            <small class="text-muted">
+                Obligatoire.<br>
+                {{ form_errors(form.code) }}
+            </small>
+        </div>
+    </div>
+</div>
+
+{# Row Start  #}
+<div class="row">  
+    {# Price #}
+    <div class="col-md-2 col-dm-offset-1">
+        <div class="form-group">
+            {{ form_label(form.price, "Prix H.T") }}
+
+            <div class="input-group">                     
+                {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon"><span class="input-symbol">€</span></div>                               
+            </div>
+            <small class="text-muted">
+                Obligatoire.<br>
+                {{ form_errors(form.price) }}
+            </small>
+        </div>
+    </div>
+    {# Units #}
+    <div class="col-md-2 col-md-offset-1">
+        <div class="form-group">
+            {{ form_label(form.units, "Unitée") }}                 
+            {{ form_widget(form.units, {'attr': {'class': 'form-control'}}) }}
+            <small class="text-muted">
+                Ex : heures, pièces, forfait ... <br>Obligatoire.<br>
+                {{ form_errors(form.units) }}
+            </small>
+        </div>
+    </div>
+    {# Tax #}
+        <div class="col-md-2 col-md-offset-1">
+        <div class="form-group">
+            {{ form_label(form.tax, "T.V.A Applicable") }}
+
+            <div class="input-group">                     
+                {{ form_widget(form.tax, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon"><span class="input-symbol">%</span></div>                               
+            </div>
+            <small class="text-muted">
+                Obligatoire.<br>
+                {{ form_errors(form.tax) }}
+            </small>
+        </div>
+    </div>
+    {# MaxDiscount #}
+    <div class="col-md-2 col-md-offset-1">
+        <div class="form-group">
+            {{ form_label(form.maxDiscount, "Remise maximum") }}
+
+            <div class="input-group">                     
+                {{ form_widget(form.maxDiscount, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon"><span class="input-symbol">%</span></div>                               
+            </div>
+            <small class="text-muted">
+                Optionnel.
+                {{ form_errors(form.maxDiscount) }}
+            </small>
+        </div>
+    </div>
+{# Row Start  #}
+<div class="row">
+    <div class="form-group">
+        {{ form_label(form.description, "Description du produit / service") }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows' : 5}}) }}
+        <small class="text-muted">
+            Optionnel - 1.500 caractères max.<br>
+            {{ form_errors(form.description) }}
+        </small>
+    </div>
+</div>
+{# Save Button #}
+{{ form_widget(form.submit, {'label': 'Enregistrer', 'attr': {'class': 'btn btn-primary'}}) }}
+
+{{ form_rest(form) }}
+
+{{ form_end(form) }}
+</div>

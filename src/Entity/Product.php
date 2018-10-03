@@ -70,7 +70,6 @@ class Product
     /**
      * @ORM\Column(type="float", nullable=true)
      * @Assert\Type("float")
-     * @Assert\NotBlank()
      */
     private $maxDiscount;
 

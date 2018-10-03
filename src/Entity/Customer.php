@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
@@ -19,16 +20,18 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 3, max = 255)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 3, max = 255)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $phone;
 
@@ -39,6 +42,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Type("string")
      */
     private $type;
 
@@ -49,6 +53,7 @@ class Customer
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
      */
     private $isProspectiveCustomer = true;
 
@@ -59,11 +64,13 @@ class Customer
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $dateCreate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $dateUpdate;
 

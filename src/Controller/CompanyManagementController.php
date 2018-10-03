@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Form\ProductType;
 
-class CompanyController extends AbstractController
+class CompanyManagementController extends AbstractController
 {
     /**
      * @Route("/company", name="company")
@@ -47,7 +47,7 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()
-                                ->getManager();
+                                  ->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
 

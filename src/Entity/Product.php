@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -19,46 +20,57 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 3, max = 255)
      */
     private $name;
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 1, max = 255)
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=1500, nullable=true)
+     * @Assert\Length(max = 1500)
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Type("float")
      */
     private $tax;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(min = 1, max = 50)
      */
     private $units;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Type("float")
+     * @Assert\NotBlank()
      */
     private $price;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $dateCreate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $dateUpdate;
     
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type("float")
+     * @Assert\NotBlank()
      */
     private $maxDiscount;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuotationRepository")
@@ -23,12 +24,20 @@ class Quotation
     private $comment;
 
     /**
+     * @ORM\Column(type="text")
+     * @Assert\Length(min = 1, max = 255)
+     */
+    private $status;
+
+    /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $dateCreate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $dateUpdate;
 
@@ -99,6 +108,18 @@ class Quotation
     public function setDeal(?Deal $deal): self
     {
         $this->deal = $deal;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

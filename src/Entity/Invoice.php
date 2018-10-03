@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InvoiceRepository")
@@ -18,6 +19,7 @@ class Invoice
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
      */
     private $isPaid;
 
@@ -33,11 +35,13 @@ class Invoice
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $datePayment;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $dateCreate;
 

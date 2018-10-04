@@ -23,8 +23,7 @@ class HomeController extends AbstractController
      */
     public function licence()
     {
-        return $this->render('home/licence.html.twig', [
-            
+        return $this->render('home/licence.html.twig', [  
         ]);
     }
 
@@ -33,8 +32,7 @@ class HomeController extends AbstractController
      */
     public function privacy()
     {
-        return $this->render('home/privacy.html.twig', [
-            
+        return $this->render('home/privacy.html.twig', [            
         ]);
     }
 }

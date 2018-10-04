@@ -1,0 +1,71 @@
+{% extends 'base-lite.html.twig' %}
+
+{% block title %} {{ parent() }} | Connexion{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/custom-login.css">
+{% endblock %}
+
+{% block body %}
+<div class="dev-page dev-page-login dev-page-login-v2">
+                      
+    <div class="dev-page-login-block">
+        <a class="dev-page-login-block__logo">ISY-Gestion</a>
+        <div class="dev-page-login-block__form">
+            <div class="title"><strong>Bienvenue</strong>, merci de vous identifier.</div>
+                {% if Error %}
+                <div class="flash-danger alert alert-danger" role="alert"></div>
+                    <strong>{{ Error.messageKey|trans(Error.messageData, 'security') }}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Fermer">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+            <form action="{{ path('login') }}" method="post">                        
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" id="username" name="_username" class="form-control" {% if LastUserName is empty %} placeholder="Identifiant" {% else %} value="{{ LastUserName}}" {% endif %}>
+                    </div>
+                </div>                        
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe">
+                    </div>
+                </div>
+                    <label class="switch" id="RememberMe">
+                        <div id="textLabelRememberMe">Se souvenir de moi</div>
+                        <input type="checkbox" id="remember_me" name="_remember_me" checked />
+                        <span></span>
+                    </label>
+                <div class="form-group no-border margin-top-20">
+                    <button class="btn btn-success btn-block">Connexion</button>
+                </div>
+                <p><a href="https://www.david-evan.fr/#contact">Mot de passe oublié ?</a>                        
+            </form>
+        </div>
+        <div class="dev-page-login-block__footer">
+            &copy; {{ "now"|date("Y") }} <strong>ISY-Gestion</strong> Designed with ❤ by <a href="https://www.david-evan.fr" target="_blank">David Evan</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{#
+{% if Error %}
+    <div>{{ Error.messageKey|trans(Error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path('login') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="_username" value="{{ LastUserName}}" />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" checked />
+    <label for="remember_me">Keep me logged in</label>
+
+    <button type="submit">login</button>
+</form>
+#}

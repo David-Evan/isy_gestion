@@ -1,5 +1,6 @@
+{# Set route_name to define current page #}
+{% set route_name = app.request.get('_route') %}
 <div class="dev-page-sidebar">
-                    
         <div class="profile profile-transparent">
             <div class="profile-image">
                 <img src="assets/images/users/user_default.png">
@@ -14,33 +15,33 @@
                 <span>{{ app.user.company }}</span>
             </div>                        
         </div>
-        
+
         <ul class="dev-page-navigation">
             <li class="title">Navigation</li>
-            <li>
+            <li {% if route_name matches '{(dashboard)|(homepage)|(index)}' %}class="active" {% endif %}>
                 <a href="#"><i class="fa fa-desktop"></i> <span>Tableau de Bord</span></a>
             </li>                      
-            <li>
+            <li {% if route_name matches '{(crm)}' %}class="active" {% endif %}>
                 <a href="#"><i class="fas fa-comment-dollar"></i> <span>Gestion commerciale</span></a>
                 <ul>                               
-                    <li><a href="#"></i>Gestion des Affaires</a></li>                                
-                    <li><a href="#"></i>Gestion Clientèle</a></li>
-                    <li><a href="#"></i>Gestion des Prospects</a></li>
-                    <li><a href="#"></i>Carnet d'adresse</a></li>
+                    <li {% if route_name matches '{(crm_deal)}' %}class="active" {% endif %}><a href="#"></i>Gestion des Affaires</a></li>                                
+                    <li {% if route_name matches '{(crm_customers)}' %}class="active" {% endif %}><a href="#"></i>Gestion Clientèle</a></li>
+                    <li {% if route_name matches '{(crm_prospective)}' %}class="active" {% endif %}><a href="#"></i>Gestion des Prospects</a></li>
+                    <li {% if route_name matches '{(crm_adressbook)}' %}class="active" {% endif %}><a href="#"></i>Carnet d'adresse</a></li>
                 </ul>
             </li>                        
-            <li>
+            <li {% if route_name matches '{(finance)}' %}class="active" {% endif %}>
                 <a href="#"><i class="fas fa-file-invoice"></i> <span>Facturation</span> </a>
                 <ul>
-                    <li><a href="#"></i>Factures en attente<span class="label label-danger">+2</span> </a></li>
-                    <li><a href="#"></i>Factures archivés</a></li>
+                    <li {% if route_name matches '{(finance_waiting_invoice)}' %}class="active" {% endif %}><a href="#"></i>Factures en attente<span class="label label-danger">+2</span> </a></li>
+                    <li {% if route_name matches '{(finance_archived_invoice)}' %}class="active" {% endif %}><a href="#"></i>Factures archivés</a></li>
                 </ul>
             </li>
-            <li class="active">
+            <li {% if route_name matches '{(company)}' %}class="active" {% endif %}>
                 <a href="#"><i class="fa fa-cogs"></i><span>Gestion Entreprise</span></a>
                 <ul>
-                    <li class="active"><a href="{{ path('company_product_list') }}">Gestion des produits &amp; services</a></li>
-                    <li><a href="#">Paramètres</a></li>
+                    <li {% if route_name matches '{(company_product)}' %}class="active" {% endif %}><a href="{{ path('company_product_list') }}">Gestion des produits &amp; services</a></li>
+                    <li {% if route_name matches '{(company_options)}' %}class="active" {% endif %}><a href="#">Paramètres</a></li>
                 </ul>
             </li>
 

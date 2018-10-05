@@ -6,11 +6,127 @@
     <!-- page title -->
     <div class="page-title">
         <h1>Gestion clientèle</h1>
-
+        <p>Retrouvez facilement au sein d'une même base clientèle tous vos prospects ou clients et accédez à leurs détails.</p>
         <ul class="breadcrumb">
             <li><a href="{{path('homepage')}}">CRM</a></li>
             <li>Gestion clientèle</li>
         </ul>
-    </div>                        
+    </div>
+    <div class="wrapper wrapper-white">
+        <div class="page-subtitle">
+            <p><a href="#" class="btn btn-success"><i class="fas fa-user-plus"></i> Ajouter un client</a></p>
+        </div>         
     <!-- ./page title -->
+    <div class="tabs">                      
+        <ul class="nav nav-tabs" role="tablist">
+            <li {% if ROUTE_NAME matches '{(crm_prospective_list)}' %}class="active" {% endif %}><a href="#tab-prospects" role="tab" data-toggle="tab"><i class="fas fa-user-clock"></i> &nbsp; Prospects</a></li>
+            <li {% if ROUTE_NAME matches '{(crm_customer_list)}' %}class="active" {% endif %}><a href="#tab-customers" role="tab" data-toggle="tab"><i class="fas fa-user-edit"></i> &nbsp; Clientèle</a></li>
+            <li><a href="#tab-all" role="tab" data-toggle="tab"><i class="fas fa-users"></i> &nbsp; Tous</a></li>
+        </ul>                         
+        <div class="panel-body tab-content">
+            {# TAB : PROSPECTIVE CUSTOMERS #}
+            <div class="tab-pane active" id="tab-prospects">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-sortable">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>E-mail</th>
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Catégorie</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>                               
+                        <tbody>
+                            {% for Customer in ProspectiveCustomers %}
+                            <tr>
+                                <td><strong>{{Customer.name}}</strong></td>
+                                <td>{{Customer.email}}</td>
+                                <td>{{Customer.phone}}</td>
+                                <td>{{Customer.address|nl2br}}</td>
+                                <td>{{CUSTOMER_TYPE[Customer.type]}}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm btn-table-inline" title="Détail"><i class="fas fa-eye"></i></a> &nbsp;
+                                    <a href="#" class="btn btn-success btn-sm btn-table-inline" title="Créer un devis"><i class="fas fa-file-invoice"></i><sup><i class="fas fa-plus"></i></sup></a> &nbsp;
+                                </td> 
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {# TAB : ONLY CUSTOMERS #}
+            <div class="tab-pane" id="tab-customers">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-sortable">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>E-mail</th>
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Catégorie</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>                               
+                        <tbody>
+                            {% for Customer in OnlyCustomers %}
+                            <tr>
+                                <td><strong>{{Customer.name}}</strong></td>
+                                <td>{{Customer.email}}</td>
+                                <td>{{Customer.phone}}</td>
+                                <td>{{Customer.address|nl2br}}</td>
+                                <td>{{CUSTOMER_TYPE[Customer.type]}}</td>
+                                <td>
+                                        <a href="#" class="btn btn-primary btn-sm btn-table-inline" title="Détail"><i class="fas fa-eye"></i></a> &nbsp;
+                                        <a href="#" class="btn btn-success btn-sm btn-table-inline" title="Créer un devis"><i class="fas fa-file-invoice"></i><sup><i class="fas fa-plus"></i></sup></a> &nbsp;
+                                </td> 
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {# TAB : ALL CUSTOMERS #}
+            <div class="tab-pane" id="tab-all">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-sortable">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Nom</th>
+                                <th>E-mail</th>
+                                <th>Téléphone</th>
+                                <th>Adresse</th>
+                                <th>Catégorie</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>                               
+                        <tbody>
+                            {% for Customer in AllCustomers %}
+                            <tr>
+                                <td>{% if Customer.isProspectiveCustomer %}Prospect{% else %}Client{% endif %}</td>
+                                <td><strong>{{Customer.name}}</strong></td>
+                                <td>{{Customer.email}}</td>
+                                <td>{{Customer.phone}}</td>
+                                <td>{{Customer.address|nl2br}}</td>
+                                <td>{{CUSTOMER_TYPE[Customer.type]}}</td>
+                                <td>
+                                        <a href="#" class="btn btn-primary btn-sm btn-table-inline" title="Détail"><i class="fas fa-eye"></i></a> &nbsp;
+                                        <a href="#" class="btn btn-success btn-sm btn-table-inline" title="Créer un devis"><i class="fas fa-file-invoice"></i><sup><i class="fas fa-plus"></i></sup></a> &nbsp;
+                                </td> 
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}
+<script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/plugins/sortable/sortable.min.js"></script>
 {% endblock %}

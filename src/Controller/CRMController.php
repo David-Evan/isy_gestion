@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Product;
+use App\Entity\Customer;
 
 class CRMController extends AbstractController
 {
@@ -20,11 +20,20 @@ class CRMController extends AbstractController
 
     /**
      * @Route("/crm/customers", name="crm_customer_list")
+     * @Route("/crm/prospectives", name="crm_prospective_list")
      */
     public function customerList()
     {
-        return $this->render('CRM/customers.html.twig', [
-            
+        $customerRepository = $this->getDoctrine()->getRepository(Customer::class);
+        
+        $allCustomers = $customerRepository->findAll();
+        $prospectiveCustomers = $customerRepository->findByIsProspectiveCustomer(true);
+        $onlyCustomers = $customerRepository->findByIsProspectiveCustomer(false);
+
+        return $this->render('CRM/customer-list.html.twig', [
+            'AllCustomers' => $allCustomers,
+            'ProspectiveCustomers' => $prospectiveCustomers,
+            'OnlyCustomers' => $onlyCustomers,
         ]);
     }
 }

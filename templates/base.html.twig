@@ -1,4 +1,9 @@
-{% block navigation %}{% endblock %}
+{# Set var to help in views #}
+{% set CUSTOMER_TYPE = { 'individual': 'Particulier',
+                         'professionnal': 'Entreprise',
+                         'public_company': 'Service public'} 
+%}
+{% set ROUTE_NAME = app.request.get('_route') %}
 <!DOCTYPE html>
 <html lang="fr">
     <head>        

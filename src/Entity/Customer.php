@@ -11,6 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Customer
 {
+
+    const 
+        TYPE_INDIVIDUAL = 'individual',
+        TYPE_PROFESSIONNAL = 'professionnal',
+        TYPE_PUBLIC = 'public_company';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,7 +48,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Choice(choices={"individual", "professionnal", "public_company"})
+     * @Assert\Choice(choices={Customer::TYPE_INDIVIDUAL, Customer::TYPE_PROFESSIONNAL, Customer::TYPE_PUBLIC})
      */
     private $type;
 

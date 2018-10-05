@@ -42,11 +42,6 @@ class Customer
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $address;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Choice(choices={Customer::TYPE_INDIVIDUAL, Customer::TYPE_PROFESSIONNAL, Customer::TYPE_PUBLIC})
      */
@@ -56,6 +51,12 @@ class Customer
      * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Address", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
 
     /**
      * @ORM\Column(type="boolean")
@@ -129,18 +130,6 @@ class Customer
     public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
 
         return $this;
     }
@@ -225,6 +214,18 @@ class Customer
     public function setCustomer(?self $customer): self
     {
         $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | CRM/Client{% endblock %}
+
+{% block body %}
+<div class="page-profile" style="background-image: url(assets/images/user_images/user_image_2.jpg);">
+                            
+    <div class="profile profile-transparent">
+        <div class="profile-image">
+            <img src="assets/images/users/user_default.png">
+            <div class="profile-status offline"></div>
+        </div>
+        <div class="profile-info">
+            <h4>John Doe</h4>
+            <span><i class="fa fa-map-marker"></i> Orléans, France</span>
+        </div>                            
+    </div>
+    
+    <div class="page-profile-stats">
+        <div class="page-profile-stats-left">
+            <div class="pull-right">
+                <div class="page-profile-stats-count">
+                    <i class="fas fa-long-arrow-alt-up growth-increase"></i>
+                    Facturation sur l'année
+                    <span>14 522 €</span>
+                </div>
+            </div>
+        </div>
+        <div class="page-profile-stats-right">
+            <div class="pull-left">
+                <div class="page-profile-stats-count">
+                    Négociation en cours
+                    <span>2 251 €</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-star yellow-star"></i> Actualité</a>
+                <a href="#" class="list-group-item"><i class="fa fa-plus"></i> <strong>Créer une nouvelle affaire</strong></a>
+                <a href="#" class="list-group-item"><i class="fa fa-briefcase"></i> Affaires en cours <span class="badge badge-danger">1</span></a>
+                <a href="#" class="list-group-item"><i class="fas fa-file-invoice"></i> Devis</a>
+                <a href="#" class="list-group-item"><i class="fas fa-file-invoice-dollar"></i> Factures</a>
+                <a href="#" class="list-group-item"><i class="fa fa-cog"></i> Détail la fiche</a>
+            </div>
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-subtitle">
+                        <h3>Note rapide</h3>
+                        <p>Ajouter une information au profil.</p>
+                    </div>                             
+                    <div class="form-group">
+                        <label>Information</label>
+                        <textarea class="form-control" placeholder="Message à ajouter ..." rows="3"></textarea>
+                    </div>                                
+                    <button class="btn btn-primary pull-right">Ajouter</button>
+                </div>                                        
+            </div>
+        </div>
+        <div class="col-md-9">
+            <!-- Timeline -->
+            <div class="timeline">                            
+                <div class="timeline-item timeline-item-success">
+                    <div class="timeline-item-date">Il y a 10 min</div>
+                    <div class="timeline-item-icon"><i class="fa fa-check"></i></div>
+                    <div class="timeline-item-data">
+                        <h5>Devis validé</h5>
+                        <p>Devis accepté par le client.</p>
+                        <p>Intervenant pour la prestation : <strong>Mickaël.</strong></p>
+                        <button class="btn btn-success pull-right">Générer facture</button>
+                    </div>
+                </div>   
+                                       
+                <div class="timeline-item timeline-item-even">
+                    <div class="timeline-item-date">Il y a 10 min</div>
+                    <div class="timeline-item-icon"><i class="fa fa-paperclip"></i></div>
+                    <div class="timeline-item-data">
+                        <h5>Devis ajouté</h5>
+                        <p>Devis préparé selon les besoins du client. En attente de son retour.</p>
+                        <button class="btn btn-info pull-right">Afficher</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item timeline-item-primary">
+                    <div class="timeline-item-date">Il y a 5 jours</div>                                            
+                    <div class="timeline-item-icon"><i class="fas fa-pencil-alt"></i></div>
+                    <div class="timeline-item-data">
+                        <h5>Information ajoutée</h5>
+                        <p>Le client a besoin d'une prestation clef-en-main pour son nouveau parc informatique :
+                            <ul>
+                                <li>5 nouvelles machines (Bureautique)</li>
+                                <li>Serveur de stockage de données</li>
+                                <li>Déploiement d'une nouvelle messagerie cloud</li>
+                            </ul>
+                        </p>
+                        <p>Réponse attendu avant le <strong>10/10/2017</strong></p>
+                    </div>
+                </div>  
+            </div>                               
+            <!-- ./ Timeline-->
+        </div>
+    </div>
+</div>
+{% endblock %}

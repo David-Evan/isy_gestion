@@ -1,0 +1,238 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | CRM | Voir : {{Customer.name}}{% endblock %}
+
+{% block body %}
+    <!-- page title -->
+    <div class="page-title">
+        <h1>{{Customer.name}}</h1>
+        <p>{{Customer.Address.street}} - {{Customer.Address.zipCode}} {{Customer.Address.city}}</p>
+        <ul class="breadcrumb">
+            <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+            <li>CRM</li>
+            <li>Détail du client</li>
+        </ul>
+    </div>
+
+    <div class="wrapper">                   
+            <div class="row row-wider">
+                <div class="col-md-3">
+                    <div class="profile margin-bottom-0">
+                        <div class="profile-image">
+                            <img src="assets/images/users/user_default.png">
+                            <div class="profile-badges">
+                                <a href="#" class="profile-badges-left"><i class="fa fa-plus"></i></a>
+                                <a href="#" class="profile-badges-right"><i class="fa fa-camera"></i></a>
+                            </div>
+                            <div class="profile-status online"></div>
+                        </div>
+                        <div class="profile-info">
+                            <h4>{{Customer.name}}</h4>
+                            <span><i class="fa fa-map-marker"></i> &nbsp; {{Customer.Address.city}}</span>
+                        </div>
+                    </div>
+                    {% include "CRM/partial/_sidebar-customer.html.twig" %}
+                </div>
+                <div class="col-md-9">
+                    
+                    <div class="page-subtitle margin-bottom-0">
+                        <h3>Authentication details</h3>
+                        <p>Important fields for your identity in our system</p>
+                    </div>
+                    <div class="form-group-one-unit margin-bottom-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-custom">
+                                    <label>Login</label>
+                                    <input type="text" class="form-control" value="johnny"/>                                            
+                                </div>                        
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-group-custom">
+                                    <label>Password:</label>
+                                    <input type="password" class="form-control" value="password"/>                                            
+                                </div>                        
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-group-custom">
+                                    <label>Re-Password:</label>
+                                    <input type="password" class="form-control" value="password"/>                                            
+                                </div>                        
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-custom">
+                                    <label>Email Address</label>
+                                    <input type="text" class="form-control" value="johndoe@domain.com"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-group-custom">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" value="United Kingdom"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group form-group-custom">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" value="London"/>
+                                </div>
+                            </div>
+                        </div>                                                              
+                    </div>
+                    
+                    
+                    <div class="page-subtitle margin-bottom-0">
+                        <h3>Personal information</h3>
+                        <p>This information is important for us</p>
+                    </div>
+                    <div class="form-group-one-unit margin-bottom-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-custom">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" value="John"/>                                            
+                                </div>                        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-custom">
+                                    <label>Second Name</label>
+                                    <input type="text" class="form-control" value="Doe"/>                                            
+                                </div>                        
+                            </div>
+                        </div>
+                        <div class="row">                                            
+                            <div class="col-md-4">
+                                <div class="form-group form-group-custom">
+                                    <label>Birthday</label>
+                                    <div class="form-select-wrapper">
+                                        <select class="form-control">
+                                            <option>01</option>
+                                            <option>02</option>
+                                            <option>03</option>
+                                            <option>04</option>
+                                            <option>05</option>
+                                            <option>06</option>
+                                            <option>07</option>
+                                            <option>08</option>
+                                            <option>09</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option selected="selected">14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                            <option>21</option>
+                                            <option>22</option>
+                                            <option>23</option>
+                                            <option>24</option>
+                                            <option>25</option>
+                                            <option>26</option>
+                                            <option>27</option>
+                                            <option>28</option>
+                                            <option>29</option>
+                                            <option>30</option>
+                                            <option>31</option>
+                                        </select>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-group-custom">
+                                    <label>Month</label>
+                                    <div class="form-select-wrapper">
+                                        <select class="form-control">
+                                            <option>01</option>
+                                            <option selected="selected">02</option>
+                                            <option>03</option>
+                                            <option>04</option>
+                                            <option>05</option>
+                                            <option>06</option>
+                                            <option>07</option>
+                                            <option>08</option>
+                                            <option>09</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                        </select>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-group-custom">
+                                    <label>Year</label>
+                                    <div class="form-select-wrapper">
+                                        <select class="form-control">
+                                            <option>2000</option>
+                                            <option>1999</option>
+                                            <option>1998</option>
+                                            <option>1997</option>
+                                            <option>1996</option>
+                                            <option>1995</option>
+                                            <option>1994</option>
+                                            <option>1993</option>
+                                            <option>1992</option>
+                                            <option>1991</option>
+                                            <option>1990</option>
+                                            <option selected="selected">1989</option>
+                                            <option>1988</option>
+                                            <option>1987</option>
+                                            <option>1986</option>
+                                            <option>1985</option>
+                                            <option>1984</option>
+                                            <option>1983</option>
+                                            <option>1982</option>
+                                            <option>1981</option>
+                                            <option>1980</option>
+                                        </select>
+                                    </div>
+                                </div>                        
+                            </div>
+                        </div>                                                                                                   
+                    </div>
+                    
+                    <div class="page-subtitle margin-bottom-0">
+                        <h3>About</h3>
+                        <p>Some information about yourself</p>
+                    </div>
+                    <div class="form-group-one-unit margin-bottom-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-custom">
+                                    <label>University</label>
+                                    <input type="text" class="form-control" value="National Aviation University"/>
+                                </div>                        
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-custom">
+                                    <label>Profession</label>
+                                    <input type="text" class="form-control" value="System Programmer"/>
+                                </div>                        
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-custom">
+                                    <label>About</label>
+                                    <textarea class="form-control" rows="5">After reading the January 1975 issue of Popular Electronics that demonstrated the Altair 8800, Gates contacted Micro Instrumentation and Telemetry Systems (MITS), the creators of the new microcomputer, to inform them that he and others were working on a BASIC interpreter for the platform.</textarea>
+                                </div>                        
+                            </div>                                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">                                            
+                            <button class="btn btn-danger pull-right">Save</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

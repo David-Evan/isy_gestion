@@ -19,8 +19,8 @@ class CRMController extends AbstractController
     */
 
     /**
-     * @Route("/crm/customers", name="crm_customer_list")
-     * @Route("/crm/prospectives", name="crm_prospective_list")
+     * @Route("/crm/customers", name="crm_customer_list", methods={"GET"})
+     * @Route("/crm/prospectives", name="crm_prospective_list", methods={"GET"})
      */
     public function customerList()
     {
@@ -35,5 +35,19 @@ class CRMController extends AbstractController
             'ProspectiveCustomers' => $prospectiveCustomers,
             'OnlyCustomers' => $onlyCustomers,
         ]);
+    }
+
+    /**
+     * @Route("/crm/customers/delete/{id}", name="crm_customer_delete", requirements={"id"="\d+"}, methods={"GET"})
+     */
+    public function customerDelete(Customer $customer){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($customer);
+        $entityManager->flush();
+
+        $this->addFlash('info','Le client / prospect a bien été supprimé.');
+        
+        return $this->redirectToRoute('crm_customer_list');
     }
 }

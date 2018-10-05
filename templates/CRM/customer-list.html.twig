@@ -8,7 +8,8 @@
         <h1>Gestion clientèle</h1>
         <p>Retrouvez facilement au sein d'une même base clientèle tous vos prospects ou clients et accédez à leurs détails.</p>
         <ul class="breadcrumb">
-            <li><a href="{{path('homepage')}}">CRM</a></li>
+            <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+            <li>CRM</li>
             <li>Gestion clientèle</li>
         </ul>
     </div>
@@ -25,7 +26,7 @@
         </ul>                         
         <div class="panel-body tab-content">
             {# TAB : PROSPECTIVE CUSTOMERS #}
-            <div class="tab-pane active" id="tab-prospects">
+            <div class="tab-pane {% if ROUTE_NAME matches '{(crm_prospective_list)}' %}active{% endif %}" id="tab-prospects">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-sortable">
                         <thead>
@@ -57,7 +58,7 @@
                 </div>
             </div>
             {# TAB : ONLY CUSTOMERS #}
-            <div class="tab-pane" id="tab-customers">
+            <div class="tab-pane {% if ROUTE_NAME matches '{(crm_customer_list)}' %}active{% endif %}" id="tab-customers">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-sortable">
                         <thead>

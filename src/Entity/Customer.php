@@ -42,7 +42,7 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Type("string")
+     * @Assert\Choice(choices={"individual", "professionnal", "public_company"})
      */
     private $type;
 
@@ -73,12 +73,6 @@ class Customer
      * @Assert\DateTime()
      */
     private $dateUpdate;
-
-   /**
-    * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
-    * @ORM\JoinColumn(nullable=false)
-    */
-    private $customer;
 
     public function __construct(){
         $this->setDateCreate(new \DateTime());
@@ -121,12 +115,12 @@ class Customer
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 

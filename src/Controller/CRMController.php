@@ -8,21 +8,20 @@ use App\Entity\Product;
 
 class CRMController extends AbstractController
 {
-    /**
-     * @Route("/crm", name="crm")
-     */
-    public function index()
-    {
+    /*
+    @Route("/crm", name="crm")
+    public function index(){
 
         return $this->render('CRM/index.html.twig', [
             
         ]);
     }
+    */
 
     /**
-     * @Route("/crm/customers", name="crm_customers")
+     * @Route("/crm/customers", name="crm_customer_list")
      */
-    public function clients()
+    public function customerList()
     {
         return $this->render('CRM/customers.html.twig', [
             

@@ -13,18 +13,9 @@ use App\Form\ProductType;
 class CompanyManagementController extends AbstractController
 {
     /**
-     * @Route("/company", name="company")
+     * @Route("/company/products", name="company_product_list", methods={"GET"})
      */
-    public function index(){
-        return $this->render('company/index.html.twig', [
-            'controller_name' => 'CompanyController',
-        ]);
-    }
-
-    /**
-     * @Route("/company/products", name="company_product_list", methods={"GET","HEAD"})
-     */
-    public function listProduct(){
+    public function productList(){
 
         $products = $this->getDoctrine()
                           ->getRepository(Product::class)
@@ -36,9 +27,9 @@ class CompanyManagementController extends AbstractController
     }
 
     /**
-     * @Route("/company/products/add", name="company_product_add")
+     * @Route("/company/products/add", name="company_product_add", methods={"GET", "POST"})
      */
-    public function addProduct(Request $request){
+    public function productAdd(Request $request){
 
         $product = new Product();
         $form =  $this->createForm(ProductType::class, $product)
@@ -62,9 +53,9 @@ class CompanyManagementController extends AbstractController
     }
 
     /**
-     * @Route("/company/products/update/{id}", name="company_product_update", requirements={"id"="\d+"})
+     * @Route("/company/products/update/{id}", name="company_product_update", requirements={"id"="\d+"}, methods={"GET", "POST"})
      */
-    public function updateProduct(Request $request, Product $product){
+    public function productUpdate(Request $request, Product $product){
         
         $form =  $this->createForm(ProductType::class, $product)
                       ->handleRequest($request);
@@ -87,9 +78,9 @@ class CompanyManagementController extends AbstractController
     }
 
     /**
-     * @Route("/company/products/delete/{id}", name="company_product_delete", requirements={"id"="\d+"})
+     * @Route("/company/products/delete/{id}", name="company_product_delete", requirements={"id"="\d+"}, methods={"GET"})
      */
-    public function deleteProduct(Product $product){
+    public function productDelete(Product $product){
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($product);

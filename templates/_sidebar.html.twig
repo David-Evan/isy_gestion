@@ -3,7 +3,7 @@
 <div class="dev-page-sidebar">
         <div class="profile profile-transparent">
             <div class="profile-image">
-                <img src="assets/images/users/user_default.png">
+                <img src="assets/images/users/user_david.jpg">
                 <div class="profile-badges">
                     <a href="#" class="profile-badges-left"><i class="fa fa-trophy"></i> 243</a>
                     <a href="#" class="profile-badges-right"><i class="fa fa-users"></i> 1,971</a>
@@ -25,8 +25,8 @@
                 <a href="#"><i class="fas fa-comment-dollar"></i> <span>Gestion commerciale</span></a>
                 <ul>                               
                     <li {% if route_name matches '{(crm_deal)}' %}class="active" {% endif %}><a href="#"></i>Gestion des Affaires</a></li>                                
-                    <li {% if route_name matches '{(crm_customers)}' %}class="active" {% endif %}><a href="#"></i>Gestion Clientèle</a></li>
-                    <li {% if route_name matches '{(crm_prospective)}' %}class="active" {% endif %}><a href="#"></i>Gestion des Prospects</a></li>
+                    <li {% if route_name matches '{(crm_customer)}' %}class="active" {% endif %}><a href="{{path('crm_customer_list')}}"></i>Gestion Clientèle</a></li>
+                    <li {% if route_name matches '{(crm_customer)}' %}class="active" {% endif %}><a href="{{path('crm_customer_list')}}"></i>Gestion des Prospects</a></li>
                     <li {% if route_name matches '{(crm_adressbook)}' %}class="active" {% endif %}><a href="#"></i>Carnet d'adresse</a></li>
                 </ul>
             </li>                        
@@ -44,13 +44,6 @@
                     <li {% if route_name matches '{(company_options)}' %}class="active" {% endif %}><a href="#">Paramètres</a></li>
                 </ul>
             </li>
-
-            <li>
-                <a href="#"><i class="fa fa-users"></i> <span>Développement</span></a>
-                <ul>                               
-                    <li><a href="{{ path('crm_customers') }}">Template client</a></li>                                
-                </ul>
-            </li>  
         </ul>
         
     </div>

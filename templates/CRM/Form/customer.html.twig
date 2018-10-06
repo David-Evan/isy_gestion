@@ -16,10 +16,14 @@
             <div class="col-md-6">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.name, "Nom complet") }}
-                    <div class="input-group">                     
-                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>                                
-                        {{ form_widget(form.name, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'John Doe', 'readonly':true}}) }}
-                    </div>
+                        {% if NewCustomer %}                   
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder':'John Doe' }}) }}
+                        {% else %}
+                            <div class="input-group">  
+                                <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'John Doe', 'readonly':true}}) }}
+                            </div>
+                        {% endif %}
                     <span class="help-block">
                         {{ form_errors(form.name) }}
                     </span>                                         
@@ -29,10 +33,14 @@
             <div class="col-md-6">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.email, "Adresse E-mail") }}
-                    <div class="input-group">                     
-                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
-                        {{ form_widget(form.email, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'john.doe@gmail.com', 'readonly':true}}) }}
-                    </div>
+                    {% if NewCustomer %}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder':'john.doe@gmail.com'}}) }}
+                    {% else %}
+                        <div class="input-group">                     
+                            <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'john.doe@gmail.com', 'readonly':true}}) }}
+                        </div>
+                    {% endif %}
                     <span class="help-block">                                     
                         {{ form_errors(form.email) }}
                     </span>
@@ -46,10 +54,14 @@
                 <div class="form-group form-group-custom">
                     {{ form_label(form.type, "Catégorie") }}
                     <div class="form-select-wrapper">
+                        {% if NewCustomer %}
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                        {% else %}
                         <div class="input-group">                     
                             <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
                             {{ form_widget(form.type, {'attr': {'class': 'form-control _jQ-disableable', 'readonly':true}}) }}
                         </div>
+                        {% endif %}
                     </div>
                     <span class="help-block">
                         {{ form_errors(form.type) }}
@@ -60,10 +72,14 @@
             <div class="col-md-6">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.phone, "Téléphone") }}
+                    {% if NewCustomer %}
+                        {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'placeholder':'06 12 34 56 78'}}) }}
+                    {% else %}
                     <div class="input-group">                     
                         <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
                         {{ form_widget(form.phone, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'06 12 34 56 78', 'readonly':true}}) }}
                         </div>
+                    {% endif %}
                     <span class="help-block">
                         {{ form_errors(form.phone) }}
                     </span>                                      
@@ -84,32 +100,50 @@
             <div class="col-md-12">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.address.street, "N° + Voirie") }}
+                    {% if NewCustomer %}
+                        {{ form_widget(form.address.street, {'attr': {'class': 'form-control', 'placeholder':'Ex : Rue de Paris ...'}}) }}
+                    {% else %}
                     <div class="input-group">                     
                         <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
                     {{ form_widget(form.address.street, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex : Rue de Paris ...', 'readonly':true}}) }}
                     </div>
+                    {% endif %}
                     <span class="help-block">{{ form_errors(form.address.street) }}</span>                                            
                 </div>                        
             </div>
+        </div>
+        {# Row Start #}
+        <div class="row">
             {# Address.Additional Information #}
             <div class="col-md-12">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.address.additionalInformation, "Informations supplémentaires") }}
+                    {% if NewCustomer %}
+                        {{ form_widget(form.address.additionalInformation, {'attr': {'class': 'form-control', 'placeholder':'Ex: Batiment 5, 3ème étage ...'}}) }}
+                    {% else %}
                     <div class="input-group">                     
                         <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
                     {{ form_widget(form.address.additionalInformation, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex: Batiment 5, 3ème étage ...', 'readonly':true}}) }}
                     </div>
+                    {% endif %}
                     <span class="help-block">{{ form_errors(form.address.additionalInformation) }}</span>                                 
                 </div>                        
             </div>
+        </div>
+        {# Row Start #}
+        <div class="row">
             {# Address.Zip Code #}
             <div class="col-md-4">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.address.zipCode, "Code postal") }}
+                    {% if NewCustomer %}
+                        {{ form_widget(form.address.zipCode, {'attr': {'class': 'form-control', 'placeholder':'Ex : 75001'}}) }}
+                    {% else %}
                     <div class="input-group">                     
                         <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
                     {{ form_widget(form.address.zipCode, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex : 75001', 'readonly':true}}) }}
                     </div>
+                    {% endif %}
                     <span class="help-block">{{ form_errors(form.address.zipCode) }}</span>                                              
                 </div>                        
             </div>
@@ -117,10 +151,14 @@
             <div class="col-md-8">
                 <div class="form-group form-group-custom">
                     {{ form_label(form.address.city, "Ville") }}
+                    {% if NewCustomer %}
+                        {{ form_widget(form.address.city, {'attr': {'class': 'form-control', 'placeholder':'Ex : Paris ...'}}) }}
+                    {% else %}
                     <div class="input-group">                     
                         <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
                     {{ form_widget(form.address.city, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex : Paris ...', 'readonly':true}}) }}
                     </div>
+                    {% endif %}
                     <span class="help-block">{{ form_errors(form.address.city) }}</span>                                             
                 </div>                        
             </div>
@@ -138,8 +176,13 @@
             {# Comment #}
             <div class="col-md-12">
                 <div class="form-group">
-                    {{ form_label(form.comment, "Commentaires") }} <span class="addon-lockable">&nbsp; &nbsp;<i class="fas fa-lock"></i></span>
-                    {{ form_widget(form.comment, {'attr': {'class': 'form-control wysiwyg-editable _jQ-disableable', 'rows':5}}) }}
+                    {{ form_label(form.comment, "Commentaires") }} 
+                    {% if NewCustomer %}
+                        {{ form_widget(form.comment, {'attr': {'class': 'form-control wysiwyg-editable', 'rows':5}}) }}
+                    {% else %}
+                    <span class="addon-lockable">&nbsp; &nbsp;<i class="fas fa-lock"></i></span>
+                        {{ form_widget(form.comment, {'attr': {'class': 'form-control wysiwyg-editable-readonly _jQ-disableable', 'rows':5}}) }}
+                    {% endif %}
                     <span class="help-block">{{ form_errors(form.comment) }}</span>
                 </div>                        
             </div>                                        
@@ -148,12 +191,21 @@
     <div class="row">
         <div class="col-md-12">                                            
            {# Save Button #}
-            {{ form_widget(form.submit, {'label': 'Enregistrer', 
-                    'attr': {
-                        'class': 'btn btn-primary _jQ-disableable _jQ-disableable-submit',
-                        'readonly':true,
-                    }
-                }) }}
+           {% if NewCustomer %}
+                {{ form_widget(form.submit, {'label': 'Enregistrer', 
+                'attr': {
+                    'class': 'btn btn-primary',
+                    'readonly':true,
+                }
+            }) }}               
+           {% else %}
+                {{ form_widget(form.submit, {'label': 'Enregistrer', 
+                'attr': {
+                    'class': 'btn btn-primary _jQ-disableable _jQ-disableable-submit',
+                    'readonly':true,
+                }
+            }) }}
+           {% endif %}
         </div>
     </div>
 {{ form_rest(form) }}

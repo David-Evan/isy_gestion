@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRM - Ajouter un client{% endblock %}
+
+{% block body %}
+    <!-- page title -->
+    <div class="page-title">
+        <h1>Ajouter un nouveau client</h1>
+        <p>Vous pouvez facilement créer une nouvelle fiche client / prospect. Vous pourrez ensuite y associé de nouveaux devis / factures </p>
+        <ul class="breadcrumb">
+            <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+            <li>CRM</li>
+            <li>Détail du client</li>
+        </ul>
+    </div>
+
+    <div class="wrapper wrapper-white">                   
+            <div class="row row-wider">
+                <div class="col-md-12">
+                    {% include 'CRM/Form/customer.html.twig' with {form:CustomerForm, NewCustomer:NewCustomer} only %}
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block javascripts %}
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey={{_TinyMCE_APIKey}}'></script>
+<script type="text/javascript" src="js/dev-customer-form.js"></script>
+{% endblock %}

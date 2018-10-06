@@ -74,10 +74,41 @@ class CRMController extends AbstractController
 
         return $this->render('CRM/customer-detail.html.twig', [
             'Customer' => $customer,
-            'CustomerForm' => $form->createView()
+            'CustomerForm' => $form->createView(),
+            'NewCustomer' => false
+            ]);
+        }
+
+
+    /**
+     * @Route("/crm/customers/add", name="crm_customer_add", methods={"GET", "POST"})
+     */
+    public function customerAdd(Request $request)
+    {
+        $customer = new Customer();
+        $form =  $this->createForm(CustomerType::class, $customer)
+                      ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()
+                                  ->getManager();
+
+            $entityManager->persist($customer);
+            $entityManager->flush();
+
+            $this->addFlash('success','Le client a bien été ajouté !');
+
+            return $this->redirectToRoute('crm_customer_detail', ['id' => $customer->getId()]);
+        }
+
+        return $this->render('CRM/customer-add.html.twig', [
+            'CustomerForm' => $form->createView(),
+            'NewCustomer' => true
             ]);
     }
 
+    
     /**
      * @Route("/crm/customers/delete/{id}", name="crm_customer_delete", requirements={"id"="\d+"}, methods={"GET"})
      */

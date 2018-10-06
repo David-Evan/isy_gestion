@@ -9,7 +9,7 @@
     <div class="col-md-7">
         <div class="form-group">
             {{ form_label(form.name, "Nom du produit / service") }}
-            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder':'Ex : HDD Western Digital 500Go ...'}}) }}
             <small class="text-muted">
                 Obligatoire.<br>
                 {{ form_errors(form.name) }}
@@ -21,7 +21,7 @@
     <div class="col-md-5">
         <div class="form-group">
             {{ form_label(form.code, "Code produit") }}
-            {{ form_widget(form.code, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.code, {'attr': {'class': 'form-control', 'placeholder':'Ex : HDD-WD-500G'}}) }}
             <small class="text-muted">
                 Obligatoire.<br>
                 {{ form_errors(form.code) }}
@@ -38,7 +38,7 @@
             {{ form_label(form.price, "Prix H.T") }}
 
             <div class="input-group">                     
-                {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder':'Ex : 39.40'}}) }}
                 <div class="input-group-addon"><span class="input-symbol">€</span></div>                               
             </div>
             <small class="text-muted">
@@ -51,9 +51,9 @@
     <div class="col-md-2 col-md-offset-1">
         <div class="form-group">
             {{ form_label(form.units, "Unitée") }}                 
-            {{ form_widget(form.units, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.units, {'attr': {'class': 'form-control', 'placeholder':'Ex : heures, pièces, forfait ...'}}) }}
             <small class="text-muted">
-                Ex : heures, pièces, forfait ... <br>Obligatoire.<br>
+                Obligatoire.<br>
                 {{ form_errors(form.units) }}
             </small>
         </div>
@@ -64,7 +64,7 @@
             {{ form_label(form.tax, "T.V.A Applicable") }}
 
             <div class="input-group">                     
-                {{ form_widget(form.tax, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.tax, {'attr': {'class': 'form-control', 'placeholder':'Ex : 20'}}) }}
                 <div class="input-group-addon"><span class="input-symbol">%</span></div>                               
             </div>
             <small class="text-muted">
@@ -79,7 +79,7 @@
             {{ form_label(form.maxDiscount, "Remise maximum") }}
 
             <div class="input-group">                     
-                {{ form_widget(form.maxDiscount, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.maxDiscount, {'attr': {'class': 'form-control', 'placeholder':'Ex : 15.5'}}) }}
                 <div class="input-group-addon"><span class="input-symbol">%</span></div>                               
             </div>
             <small class="text-muted">
@@ -106,3 +106,6 @@
 
 {{ form_end(form) }}
 </div>
+{% block javascripts %}
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey={{_TinyMCE_APIKey}}'></script>
+{% endblock %}

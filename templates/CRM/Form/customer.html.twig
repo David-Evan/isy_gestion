@@ -1,0 +1,161 @@
+{# User detail form #}
+{{ form_start(form) }}
+
+{# Forms errors #}
+{{ form_errors(form) }}
+
+{# Section Start #}
+    <div class="page-subtitle margin-bottom-0">
+        <h3>Identité</h3>
+        <p>Information importante à propos du client/prospect.</p>
+    </div>
+    <div class="form-group-one-unit margin-bottom-40">
+        {# Row Start #}
+        <div class="row">
+            {# Name #}
+            <div class="col-md-6">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.name, "Nom complet") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>                                
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'John Doe', 'readonly':true}}) }}
+                    </div>
+                    <span class="help-block">
+                        {{ form_errors(form.name) }}
+                    </span>                                         
+                </div>                        
+            </div>
+            {# Email #}
+            <div class="col-md-6">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.email, "Adresse E-mail") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'john.doe@gmail.com', 'readonly':true}}) }}
+                    </div>
+                    <span class="help-block">                                     
+                        {{ form_errors(form.email) }}
+                    </span>
+                </div>                        
+            </div>
+        </div>
+        {# Row Start #}
+        <div class="row">
+            <div class="col-md-6">
+                {# Type #}
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.type, "Catégorie") }}
+                    <div class="form-select-wrapper">
+                        <div class="input-group">                     
+                            <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control _jQ-disableable', 'readonly':true}}) }}
+                        </div>
+                    </div>
+                    <span class="help-block">
+                        {{ form_errors(form.type) }}
+                    </span>
+                </div>
+            </div>
+                {# Phone #}
+            <div class="col-md-6">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.phone, "Téléphone") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                        {{ form_widget(form.phone, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'06 12 34 56 78', 'readonly':true}}) }}
+                        </div>
+                    <span class="help-block">
+                        {{ form_errors(form.phone) }}
+                    </span>                                      
+                </div>
+            </div>
+        </div>                                                              
+    </div>
+    {# Section End #}
+    {# Section Start #}
+    <div class="page-subtitle margin-bottom-0">
+        <h3>Adresse</h3>
+        <p>Adresse du client/prospect. Peut être utilisé pour générer une carte de localisation.</p>
+    </div>
+    <div class="form-group-one-unit margin-bottom-40">
+        {# Row Start #}
+        <div class="row">
+            {# Address.Street #}
+            <div class="col-md-12">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.address.street, "N° + Voirie") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                    {{ form_widget(form.address.street, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex : Rue de Paris ...', 'readonly':true}}) }}
+                    </div>
+                    <span class="help-block">{{ form_errors(form.address.street) }}</span>                                            
+                </div>                        
+            </div>
+            {# Address.Additional Information #}
+            <div class="col-md-12">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.address.additionalInformation, "Informations supplémentaires") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                    {{ form_widget(form.address.additionalInformation, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex: Batiment 5, 3ème étage ...', 'readonly':true}}) }}
+                    </div>
+                    <span class="help-block">{{ form_errors(form.address.additionalInformation) }}</span>                                 
+                </div>                        
+            </div>
+            {# Address.Zip Code #}
+            <div class="col-md-4">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.address.zipCode, "Code postal") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                    {{ form_widget(form.address.zipCode, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex : 75001', 'readonly':true}}) }}
+                    </div>
+                    <span class="help-block">{{ form_errors(form.address.zipCode) }}</span>                                              
+                </div>                        
+            </div>
+            {# Address. City #}
+            <div class="col-md-8">
+                <div class="form-group form-group-custom">
+                    {{ form_label(form.address.city, "Ville") }}
+                    <div class="input-group">                     
+                        <div class="input-group-addon addon-collapse-form addon-lockable"><span class="fas fa-lock"></span></div>  
+                    {{ form_widget(form.address.city, {'attr': {'class': 'form-control _jQ-disableable', 'placeholder':'Ex : Paris ...', 'readonly':true}}) }}
+                    </div>
+                    <span class="help-block">{{ form_errors(form.address.city) }}</span>                                             
+                </div>                        
+            </div>
+        </div>                                                                                                 
+    </div>
+    {# Section End #}
+    {# Section Start #}
+    <div class="page-subtitle margin-bottom-0">
+        <h3>À Propos</h3>
+        <p>Informations supplémentaires utiles sur le client/prospect.</p>
+    </div>
+    <div class="form-group margin-bottom-20">
+        {# Row Start #}
+        <div class="row">
+            {# Comment #}
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form_label(form.comment, "Commentaires") }} <span class="addon-lockable">&nbsp; &nbsp;<i class="fas fa-lock"></i></span>
+                    {{ form_widget(form.comment, {'attr': {'class': 'form-control wysiwyg-editable _jQ-disableable', 'rows':5}}) }}
+                    <span class="help-block">{{ form_errors(form.comment) }}</span>
+                </div>                        
+            </div>                                        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">                                            
+           {# Save Button #}
+            {{ form_widget(form.submit, {'label': 'Enregistrer', 
+                    'attr': {
+                        'class': 'btn btn-primary _jQ-disableable _jQ-disableable-submit',
+                        'readonly':true,
+                    }
+                }) }}
+        </div>
+    </div>
+{{ form_rest(form) }}
+
+{{ form_end(form) }}

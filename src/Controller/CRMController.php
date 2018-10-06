@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 use App\Entity\{Customer, Address};
+use App\Form\CustomerType;
 
 class CRMController extends AbstractController
 {
@@ -41,7 +44,7 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/{id}", name="crm_customer_view", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function customerViewOne(Customer $customer)
+    public function customerViewResume(Customer $customer)
     {
         return $this->render('CRM/customer-view.html.twig', [
             'Customer' => $customer,
@@ -49,12 +52,29 @@ class CRMController extends AbstractController
     }
 
     /**
-     * @Route("/crm/customers/{id}/detail", name="crm_customer_detail", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/crm/customers/{id}/detail", name="crm_customer_detail", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
-    public function customerDetails(Customer $customer)
+    public function customerUpdate(Request $request, Customer $customer)
     {
+        $form =  $this->createForm(CustomerType::class, $customer)
+                      ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()
+                                  ->getManager();
+
+            $entityManager->persist($customer);
+            $entityManager->flush();
+
+            $this->addFlash('success','Le client a bien été modifié !');
+
+            return $this->redirectToRoute('crm_customer_detail', ['id' => $customer->getId()]);
+        }
+
         return $this->render('CRM/customer-detail.html.twig', [
             'Customer' => $customer,
+            'CustomerForm' => $form->createView()
             ]);
     }
 

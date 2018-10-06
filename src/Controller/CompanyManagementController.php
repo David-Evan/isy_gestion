@@ -67,7 +67,7 @@ class CompanyManagementController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash('success','Votre produit a bien été modifé !');
+            $this->addFlash('success','Votre produit a bien été modifié !');
             
             return $this->redirectToRoute('company_product_list');
         }

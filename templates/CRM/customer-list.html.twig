@@ -42,7 +42,7 @@
                         <tbody>
                             {% for Customer in ProspectiveCustomers %}
                             <tr>
-                                <td><strong>{{Customer.name}}</strong></td>
+                                <td><strong><a href="{{ path('crm_customer_view', {'id': Customer.id}) }}">{{Customer.name}}</a></strong></td>
                                 <td>{{Customer.email}}</td>
                                 <td>{{Customer.phone}}</td>
                                 <td>{{Customer.address.city}}</td>
@@ -74,14 +74,14 @@
                         <tbody>
                             {% for Customer in OnlyCustomers %}
                             <tr>
-                                <td><strong>{{Customer.name}}</strong></td>
+                                <td><strong><a href="{{ path('crm_customer_view', {'id': Customer.id}) }}">{{Customer.name}}</a></strong></td>
                                 <td>{{Customer.email}}</td>
                                 <td>{{Customer.phone}}</td>
                                 <td>{{Customer.address.city}}</td>
                                 <td>{{CUSTOMER_TYPE[Customer.type]}}</td>
                                 <td>
-                                        <a href="{{ path('crm_customer_view', {'id': Customer.id}) }}" class="btn btn-primary btn-sm btn-table-inline" title="Détail"><i class="fas fa-eye"></i></a> &nbsp;
-                                        <a href="#" class="btn btn-success btn-sm btn-table-inline" title="Créer un devis"><i class="fas fa-file-invoice"></i><sup><i class="fas fa-plus"></i></sup></a> &nbsp;
+                                    <a href="{{ path('crm_customer_view', {'id': Customer.id}) }}" class="btn btn-primary btn-sm btn-table-inline" title="Détail"><i class="fas fa-eye"></i></a> &nbsp;
+                                    <a href="#" class="btn btn-success btn-sm btn-table-inline" title="Créer un devis"><i class="fas fa-file-invoice"></i><sup><i class="fas fa-plus"></i></sup></a> &nbsp;
                                 </td> 
                             </tr>
                             {% endfor %}
@@ -108,7 +108,7 @@
                             {% for Customer in AllCustomers %}
                             <tr>
                                 <td>{% if Customer.isProspectiveCustomer %}Prospect{% else %}Client{% endif %}</td>
-                                <td><strong>{{Customer.name}}</strong></td>
+                                <td><strong><a href="{{ path('crm_customer_view', {'id': Customer.id}) }}">{{Customer.name}}</a></strong></td>
                                 <td>{{Customer.email}}</td>
                                 <td>{{Customer.phone}}</td>
                                 <td>{{Customer.address.city}}</td>

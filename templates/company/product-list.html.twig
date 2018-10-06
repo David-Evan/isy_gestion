@@ -36,7 +36,7 @@
                     {% for Product in Products %}
                     <tr>
                         <td>{{Product.code}}</td>
-                        <td><strong>{{Product.name}}</strong></td>
+                        <td><strong><a href="{{ path('company_product_update', {'id': Product.id}) }}">{{Product.name}}</a></strong></td>
                         <td>{{Product.description|nl2br}}</td>
                         <td>{{Product.price}} €</td>
                         <td>{{Product.tax}}%</td>

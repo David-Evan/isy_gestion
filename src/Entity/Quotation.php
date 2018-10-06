@@ -42,10 +42,10 @@ class Quotation
     private $dateUpdate;
 
     /**
-    * @ORM\ManyToOne(targetEntity="App\Entity\Deal", cascade={"persist", "remove"})
+    * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
     * @ORM\JoinColumn(nullable=false)
     */
-    private $deal;
+    private $customer;
 
     public function __construct(){
         $this->setDateCreate(new \DateTime());
@@ -100,18 +100,6 @@ class Quotation
         return $this;
     }
 
-    public function getDeal(): ?Deal
-    {
-        return $this->deal;
-    }
-
-    public function setDeal(?Deal $deal): self
-    {
-        $this->deal = $deal;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -120,6 +108,18 @@ class Quotation
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    public function setCustomer(?Customer $customer): self
+    {
+        $this->customer = $customer;
 
         return $this;
     }

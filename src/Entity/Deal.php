@@ -1,56 +1,59 @@
 <?php
+/*
+
+@Note : Disabled for this version.
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
+/*
  * @ORM\Entity(repositoryClass="App\Repository\DealRepository")
  * @ORM\HasLifecycleCallbacks()
- */
+ *
 class Deal
 {
-    /**
+    /*
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     */
+     *
     private $id;
 
-    /**
+    /*
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min = 3, max = 255)
-     */
+     *
     private $name;
 
-    /**
+    /*
      * @ORM\Column(type="text", nullable=true)
-     */
+     *
     private $comment;
 
-    /**
+    /*
      * @ORM\Column(type="text")
      * @Assert\Length(min = 1, max = 255)
-     */
+     *
     private $status;
     
-    /**
+    /*
      * @ORM\Column(type="datetime")
      * @Assert\DateTime()
-     */
+     *
     private $dateCreate;
 
-    /**
+    /*
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime()
-     */
+     *
     private $dateUpdate;
 
-    /**
+    /*
      * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     */
+     *
     private $customer;
 
     public function __construct(){
@@ -59,7 +62,7 @@ class Deal
 
     /**
      * @ORM\PreUpdate
-     */
+     *
     public function updateDate()
     {
         $this->setDateUpdate(new \Datetime());
@@ -142,3 +145,4 @@ class Deal
         return $this;
     }
 }
+*/

@@ -121,15 +121,32 @@ class CRMController extends AbstractController
     }
 
     /**
-     * @Route("/crm/address-book", name="crm_addressbook", methods={"GET"})
+     * @Route("/crm/address-book/{page}", name="crm_addressbook", 
+     *                                    requirements={"page"="\d+"},
+     *                                    defaults={"page"=1},
+     *                                    methods={"GET"})
      */
-    public function addressBook(){
+    public function addressBook($page){
+        if ($page < 1) {
+            throw $this->createNotFoundException('La page '.$page.' n\'existe pas.');
+          }
+
+        $nbPerPage = 12;
+
         $customers = $this->getDoctrine()
                           ->getRepository(Customer::class)
-                          ->findAll();
+                          ->getAddressBookCustomers($page, $nbPerPage);
 
+        $nbPages = ceil(count($customers) / $nbPerPage);
+
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+  
         return $this->render('CRM/address-book.html.twig', [
-            'Customers' => $customers,
+            'Customers'   => $customers,
+            'NbPages'     => $nbPages,
+            'Page'        => $page,
             ]);
     }
 }

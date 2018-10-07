@@ -13,7 +13,10 @@
     </ul>
 </div>
 <div class="wrapper wrapper-white">
-    <div class="row"></div>
+    <div class="page-subtitle text-center">
+        <p><a href="{{path('crm_customer_add')}}" class="btn btn-success"><i class="fas fa-user-plus"></i> Ajouter un contact</a></p>
+    </div>    
+    <div class="row">
         {% for Customer in Customers %}
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="profile">
@@ -35,12 +38,22 @@
                     </div>
                     <div class="profile-buttons">
                         <a href="{{ path('crm_customer_view', {'id': Customer.id}) }}" class="btn btn-primary btn-clean btn-rounded"><i class="fa fa-info"></i></a>
+                            &nbsp; 
                         <a href="tel:{{Customer.phone}}" class="btn btn-success btn-clean btn-rounded"><i class="fa fa-phone"></i></a>
                     </div>
                 </div>
             </div>
         {% endfor %}
+        </div>
+        <div class="pull-right">
+            <ul class="pagination">
+                {% for p in range(1, NbPages) %}
+                <li{% if p == Page %} class="active"{% endif %}>
+                    <a href="{{ path('crm_addressbook', {'page': p}) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</div>
 
 {% endblock %}

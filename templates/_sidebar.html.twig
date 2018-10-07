@@ -25,23 +25,24 @@
                 <a href="#"><i class="fas fa-comment-dollar"></i> <span>Gestion commerciale</span></a>
                 <ul>                               
                     {#<li {% if ROUTE_NAME matches '{(crm_deal)}' %}class="active" {% endif %}><a href="#"></i>Gestion des Affaires</a></li>#}                                
-                    <li {% if ROUTE_NAME matches '{(crm_customer_list)}' %}class="active" {% endif %}><a href="{{path('crm_customer_list')}}"></i>Gestion Clientèle</a></li>
-                    <li {% if ROUTE_NAME matches '{(crm_prospective_list)}' %}class="active" {% endif %}><a href="{{path('crm_prospective_list')}}"></i>Gestion des Prospects</a></li>
-                    <li {% if ROUTE_NAME matches '{(crm_adressbook)}' %}class="active" {% endif %}><a href="{{path('crm_addressbook')}}"></i>Carnet d'adresse</a></li>
+                    <li {% if ROUTE_NAME matches '{(crm_customer_list)}' %}class="active" {% endif %}><a href="{{path('crm_customer_list')}}">Gestion Clientèle</a></li>
+                    <li {% if ROUTE_NAME matches '{(crm_prospective_list)}' %}class="active" {% endif %}><a href="{{path('crm_prospective_list')}}">Gestion des Prospects</a></li>
+                    <li {% if ROUTE_NAME matches '{(crm_adressbook)}' %}class="active" {% endif %}><a href="{{path('crm_addressbook')}}">Carnet d'adresse</a></li>
+                    <li {% if ROUTE_NAME matches '{(crm_customer_add)}' %}class="active" {% endif %}><a href="{{path('crm_customer_add')}}"><i class="fas fa-plus"></i>&nbsp; Ajouter un client</a></li>
                 </ul>
             </li>                        
             <li {% if ROUTE_NAME matches '{(finance)}' %}class="active" {% endif %}>
                 <a href="#"><i class="fas fa-file-invoice"></i> <span>Facturation</span> </a>
                 <ul>
-                    <li {% if ROUTE_NAME matches '{(finance_waiting_invoice)}' %}class="active" {% endif %}><a href="#"></i>Factures en attente<span class="label label-danger">+2</span> </a></li>
-                    <li {% if ROUTE_NAME matches '{(finance_archived_invoice)}' %}class="active" {% endif %}><a href="#"></i>Factures archivés</a></li>
+                    <li {% if ROUTE_NAME matches '{(finance_waiting_invoice)}' %}class="active" {% endif %}><a href="#">Factures en attente<span class="label label-danger">+2</span> </a></li>
+                    <li {% if ROUTE_NAME matches '{(finance_archived_invoice)}' %}class="active" {% endif %}><a href="#">Factures archivés</a></li>
                 </ul>
             </li>
             <li {% if ROUTE_NAME matches '{(company)}' %}class="active" {% endif %}>
                 <a href="#"><i class="fa fa-cogs"></i><span>Gestion Entreprise</span></a>
                 <ul>
                     <li {% if ROUTE_NAME matches '{(company_product)}' %}class="active" {% endif %}><a href="{{ path('company_product_list') }}">Gestion des produits &amp; services</a></li>
-                    <li {% if ROUTE_NAME matches '{(company_options)}' %}class="active" {% endif %}><a href="#">Paramètres</a></li>
+                    <li {% if ROUTE_NAME matches '{(company_options)}' %}class="active" {% endif %}><a href="#">Paramètres</a>
                 </ul>
             </li>
         </ul>

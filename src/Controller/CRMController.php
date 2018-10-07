@@ -6,20 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Entity\{Customer, Address};
+use App\Entity\{Customer, Address, EventType};
+
 use App\Form\CustomerType;
+
+use App\Service\EventCreator;
 
 class CRMController extends AbstractController
 {
-    /*
-    @Route("/crm", name="crm")
-    public function index(){
-
-        return $this->render('CRM/index.html.twig', [
-            
-        ]);
-    }
-    */
 
     /**
      * @Route("/crm/customers", name="crm_customer_list", methods={"GET"})
@@ -40,12 +34,15 @@ class CRMController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/crm/customers/{id}", name="crm_customer_view", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function customerViewResume(Customer $customer)
+    public function customerViewResume(Customer $customer, EventCreator $eventCreator)
     {
+
+        //$eventCreator->setDescription('Une nouvelle information ! ');
+        //$eventCreator->createEvent($customer, EventType::TYPE_COMMENT_ADD);
+
         return $this->render('CRM/customer-view.html.twig', [
             'Customer' => $customer,
             ]);
@@ -104,7 +101,6 @@ class CRMController extends AbstractController
             'CustomerForm' => $form->createView(),
             ]);
     }
-
     
     /**
      * @Route("/crm/customers/delete/{id}", name="crm_customer_delete", requirements={"id"="\d+"}, methods={"GET"})

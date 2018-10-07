@@ -6,21 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Event Type : 
- * 
- *      NAME              ICON              COLOR
- * 'quotation-add'    : paperclip    :     null
- * 'quotation-accept' : check        :     success
- * 'comment-add'      : pencil-alt   :     primary
- * 
- * 
- */
-
-/**
  * @ORM\Entity(repositoryClass="App\Repository\EventTypeRepository")
  */
 class EventType
 {
+    const  TYPE_QUOTATION_ADD = 'quotation-add',
+           TYPE_QUOTATION_ACCEPT = 'quotation-accept',
+           TYPE_CUSTOMER_ADD = 'customer-add',
+           TYPE_COMMENT_ADD = 'comment-add'
+        ;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,7 +24,7 @@ class EventType
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
-     * @Assert\Length(max = 100)
+     * @Assert\Choice(choices={EventType::TYPE_QUOTATION_ADD,EventType::TYPE_QUOTATION_ACCEPT,EventType::TYPE_CUSTOMER_ADD,EventType::TYPE_COMMENT_ADD})
      */
     private $name;
 
@@ -80,7 +74,7 @@ class EventType
         return $this->color;
     }
 
-    public function setColor(string $color): self
+    public function setColor(?string $color): self
     {
         $this->color = $color;
 

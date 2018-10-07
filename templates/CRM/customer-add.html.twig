@@ -17,12 +17,11 @@
     <div class="wrapper wrapper-white">                   
             <div class="row row-wider">
                 <div class="col-md-12">
-                    {% include 'CRM/Form/customer.html.twig' with {form:CustomerForm, NewCustomer:NewCustomer} only %}
+                    {% include 'CRM/Form/customer.html.twig' with {form:CustomerForm, NewCustomer:true} only %}
                 </div>
             </div>
         </div>
 {% endblock %}
 {% block javascripts %}
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey={{_TinyMCE_APIKey}}'></script>
-<script type="text/javascript" src="js/dev-customer-form.js"></script>
 {% endblock %}

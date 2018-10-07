@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CRM - Carnet d'adresse{% endblock %}
+
+{% block body %}
+<div class="page-title">
+    <h1>Carnet d'adresse</h1>
+    <p>Retrouvez tous vos contacts, clients, et prospects, et accéder à leurs détails.</p>
+    <ul class="breadcrumb">
+        <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+        <li>CRM</li>
+        <li>Détail du client</li>
+    </ul>
+</div>
+<div class="wrapper wrapper-white">
+    <div class="row"></div>
+        {% for Customer in Customers %}
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="profile">
+                    <div class="profile-image">
+                        {% if Customer.pictureURL is empty %}
+                            <img src="assets/images/users/user_default.png" alt="Photo d'illustration de portrait générique">
+                        {% else %}
+                            <img src="{{Customer.pictureURL}}}" alt="Photo de : {{Customer.name}}">
+                        {% endif %}
+                        <div class="profile-badges">
+                            <a href="#" class="profile-badges-left"><i class="fa fa-business-time"></i> 245 €</a>
+                            <a href="#" class="profile-badges-right"><i class="fa fa-file-invoice-dollar"></i> 10 247 €</a>
+                        </div>
+                        <div class="profile-status online"></div>
+                    </div>
+                    <div class="profile-info">
+                        <h4>{{Customer.name}}</h4>
+                        <span><i class="fas fa-map-marker"></i> {{Customer.address.street}}, {{Customer.address.City|upper}}</span>
+                    </div>
+                    <div class="profile-buttons">
+                        <a href="{{ path('crm_customer_view', {'id': Customer.id}) }}" class="btn btn-primary btn-clean btn-rounded"><i class="fa fa-info"></i></a>
+                        <a href="tel:{{Customer.phone}}" class="btn btn-success btn-clean btn-rounded"><i class="fa fa-phone"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

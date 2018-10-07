@@ -38,7 +38,7 @@
                     {% include "CRM/partial/_sidebar-customer.html.twig" %}
                 </div>
                 <div class="col-md-9">
-                    {% include 'CRM/Form/customer.html.twig' with {form:CustomerForm, NewCustomer:NewCustomer} only %}
+                    {% include 'CRM/Form/customer.html.twig' with {form:CustomerForm, NewCustomer:false} only %}
                 </div>
             </div>
         </div>
@@ -46,8 +46,5 @@
 
 {% block javascripts %}
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey={{_TinyMCE_APIKey}}'></script>
-{% if NewCustomer == false %}
 <script type="text/javascript" src="js/dev-customer-form.js"></script>
-{% endif %}
-
 {% endblock %}

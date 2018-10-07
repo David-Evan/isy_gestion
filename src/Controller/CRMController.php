@@ -75,10 +75,8 @@ class CRMController extends AbstractController
         return $this->render('CRM/customer-detail.html.twig', [
             'Customer' => $customer,
             'CustomerForm' => $form->createView(),
-            'NewCustomer' => false
             ]);
-        }
-
+    }
 
     /**
      * @Route("/crm/customers/add", name="crm_customer_add", methods={"GET", "POST"})
@@ -104,7 +102,6 @@ class CRMController extends AbstractController
 
         return $this->render('CRM/customer-add.html.twig', [
             'CustomerForm' => $form->createView(),
-            'NewCustomer' => true
             ]);
     }
 
@@ -121,5 +118,18 @@ class CRMController extends AbstractController
         $this->addFlash('info','Le client / prospect a bien été supprimé.');
         
         return $this->redirectToRoute('crm_customer_list');
+    }
+
+    /**
+     * @Route("/crm/address-book", name="crm_addressbook", methods={"GET"})
+     */
+    public function addressBook(){
+        $customers = $this->getDoctrine()
+                          ->getRepository(Customer::class)
+                          ->findAll();
+
+        return $this->render('CRM/address-book.html.twig', [
+            'Customers' => $customers,
+            ]);
     }
 }

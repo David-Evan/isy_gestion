@@ -6,6 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Event Type : 
+ * 
+ *      NAME              ICON              COLOR
+ * 'quotation-add'    : paperclip    :     null
+ * 'quotation-accept' : check        :     success
+ * 'comment-add'      : pencil-alt   :     primary
+ * 
+ * 
+ */
+
+/**
  * @ORM\Entity(repositoryClass="App\Repository\EventTypeRepository")
  */
 class EventType
@@ -24,10 +35,16 @@ class EventType
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max = 255)
+     * @ORM\Column(type="string", length=70)
+     * @Assert\Length(max = 70)
      */
     private $icon;
+
+    /**
+     * @ORM\Column(type="string", length=70, nullable=true)
+     * @Assert\Length(max = 70)
+     */
+    private $color;
 
     public function getId(): ?int
     {
@@ -54,6 +71,18 @@ class EventType
     public function setIcon(string $icon): self
     {
         $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

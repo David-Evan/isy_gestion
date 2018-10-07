@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event
 {
@@ -18,33 +19,54 @@ class Event
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=1500)
-     * @Assert\Length(min = 1, max = 1500)
+     * @ORM\Column(type="string", length=1500, nullable=true)
+     * @Assert\Length(max = 1500)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min = 1, max = 255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max = 255)
      */
-    private $type;
+    private $additionalInformation;
 
-    /**
+    /** 
      * @ORM\Column(type="datetime")
      * @Assert\DateTime()
      */
     private $dateCreate;
 
-   /**
-    * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
-    * @ORM\JoinColumn(nullable=false)
-    */
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
+     */
+    private $dateUpdate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $customer;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\EventType", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
+
 
     public function __construct(){
         $this->setDateCreate(new \DateTime());
     }
-    
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setDateUpdate(new \Datetime());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,21 +77,45 @@ class Event
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getType(): ?string
+    public function getAdditionalInformation(): ?string
     {
-        return $this->type;
+        return $this->additionalInformation;
     }
 
-    public function setType(string $type): self
+    public function setAdditionalInformation(?string $additionalInformation): self
     {
-        $this->type = $type;
+        $this->additionalInformation = $additionalInformation;
+
+        return $this;
+    }
+
+    public function getDateCreate(): ?\DateTimeInterface
+    {
+        return $this->dateCreate;
+    }
+
+    public function setDateCreate(\DateTimeInterface $dateCreate): self
+    {
+        $this->dateCreate = $dateCreate;
+
+        return $this;
+    }
+
+    public function getDateUpdate(): ?\DateTimeInterface
+    {
+        return $this->dateUpdate;
+    }
+
+    public function setDateUpdate(?\DateTimeInterface $dateUpdate): self
+    {
+        $this->dateUpdate = $dateUpdate;
 
         return $this;
     }
@@ -86,14 +132,14 @@ class Event
         return $this;
     }
 
-    public function getDateCreate(): ?\DateTimeInterface
+    public function getType(): ?EventType
     {
-        return $this->dateCreate;
+        return $this->type;
     }
 
-    public function setDateCreate(\DateTimeInterface $dateCreate): self
+    public function setType(EventType $type): self
     {
-        $this->dateCreate = $dateCreate;
+        $this->type = $type;
 
         return $this;
     }

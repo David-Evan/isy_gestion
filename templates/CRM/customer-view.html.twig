@@ -8,7 +8,6 @@
     <div class="profile profile-transparent">
         <div class="profile-image">
             <img src="assets/images/users/user_default.png">
-            <div class="profile-status offline"></div>
         </div>
         <div class="profile-info">
             <h4>{{Customer.name}}</h4>
@@ -44,44 +43,27 @@
         </div>
         <div class="col-md-9">
             <!-- Timeline -->
-            <div class="timeline">                            
-                <div class="timeline-item timeline-item-success">
-                    <div class="timeline-item-date">Il y a 10 min</div>
-                    <div class="timeline-item-icon"><i class="fa fa-check"></i></div>
-                    <div class="timeline-item-data">
-                        <h5>Devis validé (n° 153325)</h5>
-                        <p>Devis accepté par le client.</p>
-                        <p>Intervenant pour la prestation : <strong>Mickaël.</strong></p>
-                        <button class="btn btn-success pull-right">Afficher la facture</button>
-                    </div>
-                </div>   
-                                       
-                <div class="timeline-item timeline-item-even">
-                    <div class="timeline-item-date">Il y a 10 min</div>
-                    <div class="timeline-item-icon"><i class="fa fa-paperclip"></i></div>
-                    <div class="timeline-item-data">
-                        <h5>Devis ajouté (n° 153325)</h5>
-                        <p>Devis préparé selon les besoins du client. En attente de son retour.</p>
-                        <button class="btn btn-info pull-right">Afficher le devis</button>
-                    </div>
-                </div>
+            <div class="timeline">  
+                
+            {% for Event in Events %}
+                {% if Event.type.color is empty %}
+                    <div class="timeline-item {% if loop.index is even %}timeline-item-even{% endif %}">
+                {% else %}
+                    <div class="timeline-item timeline-item-{{Event.type.color}} {% if loop.index is even %}timeline-item-even{% endif %}">
+                {% endif %}
+                    <div class="timeline-item-date">{{Event.dateCreate|ago}}</div>
 
-                <div class="timeline-item timeline-item-primary">
-                    <div class="timeline-item-date">Il y a 5 jours</div>                                            
-                    <div class="timeline-item-icon"><i class="fas fa-pencil-alt"></i></div>
+                    <div class="timeline-item-icon"><i class="fa fa-{{Event.type.icon}}"></i></div>
+
                     <div class="timeline-item-data">
-                        <h5>Information ajoutée</h5>
-                        <p>Le client a besoin d'une prestation clef-en-main pour son nouveau parc informatique :
-                            <ul>
-                                <li>5 nouvelles machines (Bureautique)</li>
-                                <li>Serveur de stockage de données</li>
-                                <li>Déploiement d'une nouvelle messagerie cloud</li>
-                            </ul>
-                        </p>
-                        <p>Réponse attendu avant le <strong>10/10/2017</strong></p>
-                    </div>
+                        <h5>{{Event.type.UITitle}}</h5>
+                        {{Event.type.UISubtitle|raw}}
+                        <p>{{Event.Description|raw}}</p>
+                        {{Event.type.UIButton(Event.additionalInformation)|raw}}
+                    </div>  
                 </div>  
-            </div>                               
+                {% endfor %}
+            </div>                           
             <!-- ./ Timeline-->
         </div>
     </div>

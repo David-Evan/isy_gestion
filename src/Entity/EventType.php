@@ -80,4 +80,48 @@ class EventType
 
         return $this;
     }
+
+    /**
+     * Special method to get data from Event Type. It should be extract of this file in future version. 
+     */
+    public function getUITitle()
+    {
+        $titles = [
+                    self::TYPE_QUOTATION_ADD => 'Devis ajouté',
+                    self::TYPE_QUOTATION_ACCEPT => 'Devis accepté',
+                    self::TYPE_CUSTOMER_ADD => 'Fiche client créée',
+                    self::TYPE_COMMENT_ADD => 'Information ajoutée',
+                ];
+
+        return $titles[$this->name];
+    }
+
+    public function getUIButton($href)
+    {
+        $buttons = [
+            self::TYPE_QUOTATION_ADD => '<p class="padding-top-10"><a href="'.$href.'" class="btn btn-info pull-right">Afficher le devis</a></p>',
+            self::TYPE_QUOTATION_ACCEPT => '<p class="padding-top-10"><a href="'.$href.'" class="btn btn-success pull-right">Afficher la facture</a></p>',
+        ];
+        
+        return array_key_exists($this->name, $buttons) ? $buttons[$this->name] : null; 
+    }
+
+    public function getUISubtitle()
+    {
+        $subtitles = [
+            self::TYPE_CUSTOMER_ADD => '<p><strong>Félicitation</strong>, la fiche client vient d\'être ajoutée.</p><p> Faites lui parvenir vos premiers devis !</p>',
+        ];
+        
+        return array_key_exists($this->name, $subtitles) ? $subtitles[$this->name] : null; 
+    }
+
+    public function canBeRemove(){
+        $canBeRemoves = [
+            self::TYPE_QUOTATION_ADD => false,
+            self::TYPE_QUOTATION_ACCEPT => false,
+            self::TYPE_CUSTOMER_ADD => false,
+            self::TYPE_COMMENT_ADD => true,
+        ];
+        return $canBeRemoves[$this->name];
+    }
 }

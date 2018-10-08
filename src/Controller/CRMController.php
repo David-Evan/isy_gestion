@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Entity\{Customer, Address, EventType};
+use App\Entity\{Customer, Address, EventType, Event};
 
 use App\Form\CustomerType;
 
@@ -37,14 +37,20 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/{id}", name="crm_customer_view", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function customerViewResume(Customer $customer, EventCreator $eventCreator)
+    public function customerViewResume(Customer $customer)
     {
-
-        //$eventCreator->setDescription('Une nouvelle information ! ');
+        //$eventCreator->setDescription('Encore une nouvelle info ! ');
         //$eventCreator->createEvent($customer, EventType::TYPE_COMMENT_ADD);
 
+        $events = $this->getDoctrine()
+                       ->getRepository(Event::class)
+                       ->findByCustomer($customer,
+                                        ['dateCreate'=>'DESC'],
+                                        10 // Limit
+                                    ); 
         return $this->render('CRM/customer-view.html.twig', [
             'Customer' => $customer,
+            'Events' => $events,
             ]);
     }
 

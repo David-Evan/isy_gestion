@@ -11,7 +11,6 @@ use App\Entity\{EventType, Event, Customer, Quotation};
  */
 class EventCreator 
 {
-
     private $_doctrine;
     
     private $description;

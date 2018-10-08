@@ -1,0 +1,18 @@
+{# Customer detail form #}
+{{ form_start(form, {'action': path('crm_customer_add_comment', {'id':CustomerID})} ) }}
+
+{# Forms errors #}
+{{ form_errors(form) }}
+<div class="form-group">
+    {{ form_label(form.comment) }}
+    {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'placeholder':'Message à ajouter ...', 'rows':3 }}) }}
+    <span class="help-block">
+        &nbsp; &nbsp; Min : 3 - Max 1.500 caractères.
+        {{ form_errors(form.comment) }}
+    </span> 
+</div>                                
+{{ form_widget(form.submit, {'label': 'Ajouter', 'attr': { 'class': 'btn btn-primary'}}) }}
+
+{{ form_rest(form) }}
+
+{{ form_end(form) }}

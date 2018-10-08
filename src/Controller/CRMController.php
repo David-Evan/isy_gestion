@@ -5,9 +5,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Entity\{Customer, Address, EventType, Event};
+use App\Entity\{Customer, Address, EventType, Event, CustomerComment};
 
-use App\Form\CustomerType;
+use App\Form\{CustomerType, CustomerCommentType};
 
 use App\Service\EventCreator;
 
@@ -36,20 +36,22 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/{id}", name="crm_customer_view", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function customerViewResume(Customer $customer)
+    public function customerViewResume(Request $request, Customer $customer)
     {
-        //$eventCreator->setDescription('Encore une nouvelle info ! ');
-        //$eventCreator->createEvent($customer, EventType::TYPE_COMMENT_ADD);
-
         $events = $this->getDoctrine()
                        ->getRepository(Event::class)
                        ->findByCustomer($customer,
                                         ['dateCreate'=>'DESC'],
                                         10 // Limit
                                     ); 
+
+        // Add comment form (sidebar)
+        $form =  $this->createForm(CustomerCommentType::class);
+
         return $this->render('CRM/customer-view.html.twig', [
             'Customer' => $customer,
             'Events' => $events,
+            'CustomerCommentForm' => $form->createView(),
             ]);
     }
 
@@ -110,7 +112,8 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/delete/{id}", name="crm_customer_delete", requirements={"id"="\d+"}, methods={"GET"})
      */
-    public function customerDelete(Customer $customer){
+    public function customerDelete(Customer $customer)
+    {
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($customer);
@@ -122,12 +125,34 @@ class CRMController extends AbstractController
     }
 
     /**
+     * @Route("/crm/customers/add-comment/{id}", name="crm_customer_add_comment", requirements={"id"="\d+"}, methods={"POST"})
+     */
+    public function customerAddComment(Request $request, Customer $customer, EventCreator $eventCreator)
+    {
+        $customerComment = new CustomerComment();
+        $form =  $this->createForm(CustomerCommentType::class, $customerComment)
+                      ->handleRequest($request);
+        
+        if(!$form->isValid()){
+            $this->addFlash('danger','Une erreur est survenue : '.$form->getErrors()[0]);
+            return $this->redirectToRoute('crm_customer_view', ['id' => $customer->getId()]);
+        }
+
+        $eventCreator->setDescription($customerComment->getComment());
+        $eventCreator->createEvent($customer, EventType::TYPE_COMMENT_ADD);
+        $this->addFlash('success','Votre information a été ajoutée !');
+
+        return $this->redirectToRoute('crm_customer_view', ['id' => $customer->getId()]);
+    }
+
+    /**
      * @Route("/crm/address-book/{page}", name="crm_addressbook", 
      *                                    requirements={"page"="\d+"},
      *                                    defaults={"page"=1},
      *                                    methods={"GET"})
      */
-    public function addressBook($page){
+    public function addressBook($page)
+    {
         if ($page < 1) {
             throw $this->createNotFoundException('La page '.$page.' n\'existe pas.');
           }

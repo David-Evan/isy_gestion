@@ -49,7 +49,7 @@ class Event
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\EventType", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\EventType", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;

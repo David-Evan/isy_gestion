@@ -1,0 +1,25 @@
+<div class="timeline">  
+                
+{% for Event in Events %}
+    {% if Event.type.color is empty %}
+    <div class="timeline-item {% if loop.index is even %}timeline-item-even{% endif %}">
+    {% else %}
+    <div class="timeline-item timeline-item-{{Event.type.color}} {% if loop.index is even %}timeline-item-even{% endif %}">
+    {% endif %}
+        <div class="timeline-item-date">{{Event.dateCreate|ago}}</div>
+
+        <div class="timeline-item-icon"><i class="fa fa-{{Event.type.icon}}"></i></div>
+
+        <div class="timeline-item-data">
+        {% if Event.type.isRemovableByUser %}
+            <div class="timeline-item-remove pull-right"><a href="{{path('event_delete', {'id':Event.Id})}}" class="_jQConfirm-before-remove"><i class="fas fa-times"></i></a></div>
+        {% endif %}
+            
+            <h5>{{Event.type.UITitle}}</h5>
+            {{Event.type.UISubtitle|raw}}
+            <p>{{Event.Description|raw}}</p>
+            {{Event.type.UIButton(Event.additionalInformation)|raw}}
+        </div>  
+    </div>  
+    {% endfor %}
+</div>

@@ -115,7 +115,7 @@ class EventType
         return array_key_exists($this->name, $subtitles) ? $subtitles[$this->name] : null; 
     }
 
-    public function canBeRemovedByUser(){
+    public function isRemovableByUser(){
         $canBeRemoves = [
             self::TYPE_QUOTATION_ADD => false,
             self::TYPE_QUOTATION_ACCEPT => false,

@@ -43,7 +43,7 @@ class Event
     private $dateUpdate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $customer;

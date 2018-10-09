@@ -7,7 +7,9 @@
                             
     <div class="profile profile-transparent">
         <div class="profile-image">
-            <img src="assets/images/users/user_default.png">
+            <img src="
+            {% if Customer.PictureURL is not empty %}{{Customer.PictureURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}
+            "> 
         </div>
         <div class="profile-info">
             <h4>{{Customer.name}}</h4>

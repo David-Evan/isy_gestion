@@ -23,7 +23,9 @@
                     </div>
                     <div class="profile margin-bottom-0">  
                         <div class="profile-image">
-                            <img src="assets/images/users/user_default.png">
+                            <img src="
+                            {% if Customer.PictureURL is not empty %}{{Customer.PictureURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}
+                            "> 
                             {#<div class="profile-badges">
                                 <a href="#" class="profile-badges-left"><i class="fa fa-plus"></i></a>
                                 <a href="#" class="profile-badges-right"><i class="fa fa-camera"></i></a>

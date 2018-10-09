@@ -45,6 +45,17 @@
             <!-- Timeline -->
             {% include "CRM/partial/_event-view.html.twig" with {Events:Events} only %}                      
             <!-- ./ Timeline-->
+            {% if Page > 1 %}
+            <div class="pull-right">
+                <ul class="pagination">
+                    {% for p in range(1, NbPages) %}
+                    <li{% if p == Page %} class="active"{% endif %}>
+                        <a href="{{ path('crm_customer_view', {'id':Customer.Id, 'page': p}) }}">{{ p }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

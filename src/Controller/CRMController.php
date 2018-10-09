@@ -14,7 +14,9 @@ use App\Service\EventCreator;
 class CRMController extends AbstractController
 {
 
-    /**
+    const PAGINATION_ADDRESSBOOK = 12, // Addressbook contacts per page
+          PAGINATION_EVENTS  = 8;    // Timeline events per page
+    /** 
      * @Route("/crm/customers", name="crm_customer_list", methods={"GET"})
      * @Route("/crm/prospectives", name="crm_prospective_list", methods={"GET"})
      */
@@ -34,16 +36,26 @@ class CRMController extends AbstractController
     }
 
     /**
-     * @Route("/crm/customers/{id}", name="crm_customer_view", methods={"GET"}, requirements={"id"="\d+"})
+     * @Route("/crm/customers/{id}/{page}", name="crm_customer_view", 
+     *                                      methods={"GET"}, 
+     *                                      requirements={"id"="\d+", "page"="\d+"}, 
+     *                                      defaults={"page"=1})
      */
-    public function customerViewResume(Customer $customer)
+    public function customerViewResume(Customer $customer, int $page)
     {
+        if ($page < 1) {
+            throw $this->createNotFoundException('La page '.$page.' n\'existe pas.');
+        }
+
         $events = $this->getDoctrine()
                        ->getRepository(Event::class)
-                       ->findByCustomer($customer,
-                                        ['dateCreate'=>'DESC'],
-                                        10 // Limit
-                                    ); 
+                       ->getEventsForCustomer($customer, $page, self::PAGINATION_EVENTS);
+        
+        $nbPages = ceil(count($customer) / self::PAGINATION_EVENTS);
+
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
 
         // Add comment form (sidebar)
         $form =  $this->createForm(CustomerCommentType::class);
@@ -52,7 +64,9 @@ class CRMController extends AbstractController
             'Customer' => $customer,
             'Events' => $events,
             'CustomerCommentForm' => $form->createView(),
-            ]);
+            'NbPages'     => $nbPages,
+            'Page'        => $page,
+        ]);
     }
 
     /**
@@ -154,19 +168,17 @@ class CRMController extends AbstractController
      *                                    defaults={"page"=1},
      *                                    methods={"GET"})
      */
-    public function addressBook($page)
+    public function addressBook(int $page)
     {
         if ($page < 1) {
             throw $this->createNotFoundException('La page '.$page.' n\'existe pas.');
           }
 
-        $nbPerPage = 12;
-
         $customers = $this->getDoctrine()
                           ->getRepository(Customer::class)
-                          ->getAddressBookCustomers($page, $nbPerPage);
+                          ->getAddressBookCustomers($page, self::PAGINATION_ADDRESSBOOK);
 
-        $nbPages = ceil(count($customers) / $nbPerPage);
+        $nbPages = ceil(count($customers) / self::PAGINATION_ADDRESSBOOK);
 
         if ($page > $nbPages) {
             throw $this->createNotFoundException("La page ".$page." n'existe pas.");

@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
+use App\Entity\Customer;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +22,19 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-//    /**
-//     * @return Event[] Returns an array of Event objects
-//     */
-    /*
-    public function findByExampleField($value)
+    
+    public function getEventsForCustomer(Customer $customer, int $page, int $nbPerPage = 10)
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query =  $this ->createQueryBuilder('e')
+                        ->andWhere('e.customer = :customer')
+                        ->setParameter('customer', $customer)
+                        ->orderBy('e.dateCreate', 'DESC')
+                        ->setFirstResult(($page-1) * $nbPerPage)
+                        ->setMaxResults($nbPerPage)
+                        ;
+        
+        return new Paginator($query, true);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+
 }

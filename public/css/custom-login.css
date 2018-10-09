@@ -1,0 +1,44 @@
+.dev-page.dev-page-login.dev-page-login-v2{
+    background:none;
+    background-image: url("../img/backgrounds/default-background.jpg");
+}
+.dev-page.dev-page-login .dev-page-login-block__footer{
+    font-size: 1em;
+}
+.dev-page.dev-page-login .dev-page-login-block{
+    background-color: rgba(52, 73, 94, 0.5);
+    width: 380px;
+    padding: 35px;
+    border-radius: 15px;
+}
+
+.dev-page.dev-page-login,
+.dev-page.dev-page-login .dev-page-login-block__form .form-group .input-group-addon,
+.dev-page.dev-page-login .dev-page-login-block__footer,
+.dev-page.dev-page-login .dev-page-login-block a,
+.dev-page.dev-page-login .dev-page-login-block__form .title
+{
+    color:#fff;
+}
+
+.dev-page.dev-page-login .dev-page-login-block__form .form-group .form-control::-webkit-input-placeholder {
+    color: #ddd;
+}
+.dev-page.dev-page-login .dev-page-login-block__form .form-group .form-control::-moz-placeholder {
+    color: #ddd;
+}
+.dev-page.dev-page-login .dev-page-login-block__form .form-group .form-control:-moz-placeholder {
+    color: #ddd;
+}
+.dev-page.dev-page-login .dev-page-login-block__form .form-group .form-control:-ms-input-placeholder {
+    color: #ddd;
+}
+
+#RememberMe{
+    width: 100%;
+    text-align: right;
+}
+#textLabelRememberMe{
+    float: left;
+    padding-left: 15px;
+}

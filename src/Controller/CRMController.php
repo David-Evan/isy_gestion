@@ -16,6 +16,7 @@ class CRMController extends AbstractController
 
     const PAGINATION_ADDRESSBOOK = 12, // Addressbook contacts per page
           PAGINATION_EVENTS  = 8;    // Timeline events per page
+
     /** 
      * @Route("/crm/customers", name="crm_customer_list", methods={"GET"})
      * @Route("/crm/prospectives", name="crm_prospective_list", methods={"GET"})
@@ -102,7 +103,7 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/add", name="crm_customer_add", methods={"GET", "POST"})
      */
-    public function customerAdd(Request $request)
+    public function customerAdd(Request $request, EventCreator $eventCreator)
     {
         $customer = new Customer();
         $form =  $this->createForm(CustomerType::class, $customer)
@@ -115,6 +116,8 @@ class CRMController extends AbstractController
 
             $entityManager->persist($customer);
             $entityManager->flush();
+
+            $eventCreator->createEvent($customer, EventType::TYPE_CUSTOMER_ADD);
 
             $this->addFlash('success','Le client a bien été ajouté !');
 

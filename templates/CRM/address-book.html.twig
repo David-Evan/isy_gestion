@@ -21,11 +21,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="profile">
                     <div class="profile-image">
-                        {% if Customer.pictureURL is empty %}
-                            <img src="assets/images/users/user_default.png" alt="Photo d'illustration de portrait générique">
-                        {% else %}
-                            <img src="{{Customer.pictureURL}}}" alt="Photo de : {{Customer.name}}">
-                        {% endif %}
+                        <img src="{% if Customer.PictureURL is not empty %}{{Customer.PictureURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}"> 
                         {#<div class="profile-badges">
                             <a href="#" class="profile-badges-left"><i class="fa fa-business-time"></i> 245 €</a>
                             <a href="#" class="profile-badges-right"><i class="fa fa-file-invoice-dollar"></i> 10 247 €</a>

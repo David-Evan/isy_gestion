@@ -5,8 +5,7 @@
             <div class="profile-image">
                 <img src="assets/images/users/user_david.jpg">
                 <div class="profile-badges">
-                    <a href="#" class="profile-badges-left"><i class="fa fa-trophy"></i> 243</a>
-                    <a href="#" class="profile-badges-right"><i class="fa fa-users"></i> 1,971</a>
+                    <a href="#" class="profile-badges-left"><i class="fa fa-users"></i> {{ _Stats.TotalCustomers }}</a>
                 </div>
             </div>
             <div class="profile-info">
@@ -30,11 +29,11 @@
                     <li {% if ROUTE_NAME matches '{(crm_customer_add)}' %}class="active" {% endif %}><a href="{{path('crm_customer_add')}}"><i class="fas fa-plus"></i>&nbsp; Ajouter un client</a></li>
                 </ul>
             </li>                        
-            <li {% if ROUTE_NAME matches '{(finance)}' %}class="active" {% endif %}>
-                <a href="#"><i class="fas fa-file-invoice"></i> <span>Facturation</span> </a>
+            <li {% if ROUTE_NAME matches '{(erp)}' %}class="active" {% endif %}>
+                <a href="#"><i class="fas fa-file-invoice"></i> <span>Facturation (Fonctionnalité à venir)</span> </a>
                 <ul>
-                    <li {% if ROUTE_NAME matches '{(finance_waiting_invoice)}' %}class="active" {% endif %}><a href="#">Factures en attente<span class="label label-danger">+2</span> </a></li>
-                    <li {% if ROUTE_NAME matches '{(finance_archived_invoice)}' %}class="active" {% endif %}><a href="#">Factures archivés</a></li>
+                    <li {% if ROUTE_NAME matches '{(erp)}' %}class="active" {% endif %}><a href="#">Factures en attente<span class="label label-danger">+2</span> </a></li>
+                    <li {% if ROUTE_NAME matches '{(erp_archived_invoice)}' %}class="active" {% endif %}><a href="#">Factures archivés</a></li>
                 </ul>
             </li>
             <li {% if ROUTE_NAME matches '{(company)}' %}class="active" {% endif %}>

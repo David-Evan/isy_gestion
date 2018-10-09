@@ -77,7 +77,7 @@ class Address
 
     public function setCity(string $city): self
     {
-        $this->city = ucfirst(strtolower($city));
+        $this->city = $city;
 
         return $this;
     }

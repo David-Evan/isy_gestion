@@ -20,6 +20,9 @@ class CustomerRepository extends ServiceEntityRepository
         parent::__construct($registry, Customer::class);
     }
 
+    /**
+     * Get all customer (paginated)
+     */
     public function getAddressBookCustomers(int $page, int $nbPerPage = 12)
     {
         $query =  $this->createQueryBuilder('c')
@@ -31,5 +34,15 @@ class CustomerRepository extends ServiceEntityRepository
         
         return new Paginator($query, true);
     }
-    
+
+    /**
+     * Get total customers number (count)
+     */
+    public function getTotalCustomers()
+    {
+        return     $this->createQueryBuilder('c')
+                        ->select('COUNT(c)')
+                        ->getQuery()
+                        ->getSingleScalarResult();
+    }
 }

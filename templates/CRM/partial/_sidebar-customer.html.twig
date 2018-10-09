@@ -1,10 +1,10 @@
 <div class="list-group">
-    <a href="#" class="list-group-item active"><i class="fa fa-star yellow-star"></i> Actualité</a>
-    {#<a href="#" class="list-group-item"><i class="fa fa-plus"></i> <strong>Ajouter un nouveau devis</strong></a>#}
+    <a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="list-group-item {% if ROUTE_NAME matches '{(crm_customer_view)}' %}active{% endif %}"><i class="fa fa-star yellow-star"></i> Actualité</a>
+    <a class="list-group-item"><i class="fa fa-plus"></i> <strong>Ajouter un nouveau devis</strong></a>
     {#<a href="#" class="list-group-item"><i class="fa fa-briefcase"></i> Affaires en cours <span class="badge badge-danger">1</span></a>#}
-    {#<a href="#" class="list-group-item"><i class="fas fa-file-invoice"></i> Devis <span class="badge badge-info">1</span></a>#}
-    {#<a href="#" class="list-group-item"><i class="fas fa-file-invoice-dollar"></i> Factures</a>#}
-    <a href="{{path('crm_customer_detail', {'id':Customer.id})}}" class="list-group-item"><i class="fa fa-cog"></i> Détail la fiche</a>
+    <a class="list-group-item"><i class="fas fa-file-invoice"></i> Devis <span class="badge badge-info">1</span></a>
+    <a class="list-group-item"><i class="fas fa-file-invoice-dollar"></i> Factures</a>
+    <a href="{{path('crm_customer_detail', {'id':Customer.id})}}" class="list-group-item {% if ROUTE_NAME matches '{(crm_customer_detail)}' %}active{% endif %}"><i class="fa fa-cog"></i> Détail la fiche</a>
 </div>
 
 <div class="panel panel-default">

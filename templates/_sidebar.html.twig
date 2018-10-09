@@ -30,9 +30,9 @@
                 </ul>
             </li>                        
             <li {% if ROUTE_NAME matches '{(erp)}' %}class="active" {% endif %}>
-                <a href="#"><i class="fas fa-file-invoice"></i> <span>Facturation (Fonctionnalité à venir)</span> </a>
+                <a href="#"><i class="fas fa-file-invoice"></i> <span style="color:grey">Facturation (A venir)</span> </a>
                 <ul>
-                    <li {% if ROUTE_NAME matches '{(erp)}' %}class="active" {% endif %}><a href="#">Factures en attente<span class="label label-danger">+2</span> </a></li>
+                    <li {% if ROUTE_NAME matches '{(erp_waiting_invoice)}' %}class="active" {% endif %}><a href="#">Factures en attente<span class="label label-danger">+2</span> </a></li>
                     <li {% if ROUTE_NAME matches '{(erp_archived_invoice)}' %}class="active" {% endif %}><a href="#">Factures archivés</a></li>
                 </ul>
             </li>

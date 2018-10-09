@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} ERP | Facture {% endblock %}
+
+{% block body %}
+
+ <!-- invoice -->
+ <div class="dev-invoice">
+                            
+    <div class="dev-invoice-title">
+        <div class="dev-invoice-title-logo">
+            <img src="img/logo-invoice.png">
+        </div>
+        <div class="dev-invoice-title-info">
+            [Facture-Devis] #{Numéro}<br>
+            <span>8 Octobre 2017</span>
+            <p>
+                Échéance: 8 Novembre 2017
+            </p>
+        </div>
+    </div>
+    
+    <div class="dev-invoice-sides">
+        <div class="dev-invoice-sides-left">
+            {Entreprise Nom}<br>
+            <span>{Entreprise Adresse}</span><br>
+            <span>{Entreprise Adresse 2}</span>
+        </div>
+        <div class="dev-invoice-sides-separator">
+            <i class="fa fa-angle-right"></i>
+        </div>
+        <div class="dev-invoice-sides-right">
+            {Client nom}<br>                                    
+            <span>{Client Adresse}</span><br>
+            <span>{Client Adresse 2}</span>
+        </div>
+    </div>
+    
+    <table class="dev-invoice-table">
+        <tr>
+            <th width="10%">Code Article</th>
+            <th width="15%">Nom Article</th>
+            <th width="29%">Description produit</th>{#class="sub-color"#}
+            <th width="10%">Unitée</th>
+            <th width="6%">Prix H.T / unitée</th>
+            <th width="6%">Remise (%)</th>
+            <th width="6%">Quantitée</th>
+            <th width="6%">T.V.A</th>
+            <th width="12%">Total (T.T.C.)</th>
+        </tr>
+        <tr>
+            <td>APL-MBPRO-15</td>
+            <td>Macbook Pro 15"</td>
+            <td>Apple Macbook Pro - 17 pouces - 480 Go SSD.<br>Inclut : Carte vidéo nVidia 2080 GTX</td>
+            <td>Pièce</td>
+            <td>1845,12 €</td>
+            <td>12,5%</td>
+            <td>1</td>
+            <td>20%</td>
+            <td>1937,37 €</td>
+        </tr>
+    </table>
+
+    <div class="dev-invoice-total pull-right">
+        <div class="dev-invoice-total-row"><span>Total H.T:</span> 1614,48 €</div>
+        <div class="dev-invoice-total-row"><span>Total T.V.A:</span> 92,25 €</div>
+        <div class="dev-invoice-total-row total"><span>Total à payer</span> 1937,37 €</div>
+    </div>
+    <div class="dev-invoice-notes">
+        <strong>Notes:</strong> Paypal Address: ppaddress@domain.com
+    </div>                                                        
+</div>
+<!-- invoice -->
+
+{% endblock %}

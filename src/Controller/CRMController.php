@@ -36,7 +36,7 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/{id}", name="crm_customer_view", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function customerViewResume(Request $request, Customer $customer)
+    public function customerViewResume(Customer $customer)
     {
         $events = $this->getDoctrine()
                        ->getRepository(Event::class)
@@ -60,6 +60,8 @@ class CRMController extends AbstractController
      */
     public function customerUpdate(Request $request, Customer $customer)
     {
+        $customerCommentForm =  $this->createForm(CustomerCommentType::class)->createView();
+                
         $form =  $this->createForm(CustomerType::class, $customer)
                       ->handleRequest($request);
 
@@ -79,6 +81,7 @@ class CRMController extends AbstractController
         return $this->render('CRM/customer-detail.html.twig', [
             'Customer' => $customer,
             'CustomerForm' => $form->createView(),
+            'CustomerCommentForm' => $customerCommentForm,
             ]);
     }
 

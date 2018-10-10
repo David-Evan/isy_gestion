@@ -1,0 +1,93 @@
+{{ form_start(form) }}
+
+{# Forms errors #}
+{{ form_errors(form) }}
+
+{# Row Start #}
+
+{# Section Start #}
+<div class="page-subtitle margin-bottom-0">
+    <h3>Identité</h3>
+    <p>Information importante à propos de votre société</p>
+</div>
+<div class="form-group-one-unit margin-bottom-40">
+    {# Row Start #}
+    <div class="row">
+        {# Name #}
+        <div class="col-md-6">
+            <div class="form-group form-group-custom">
+                {{ form_label(form.name, "Nom de la société") }}                
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                <span class="help-block">
+                {{ form_errors(form.name) }}
+                </span>                                         
+            </div>                        
+        </div>
+        {# Email #}
+        <div class="col-md-6">
+            <div class="form-group form-group-custom">
+                {{ form_label(form.email, "Adresse E-mail de la société") }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                <span class="help-block">                                     
+                    {{ form_errors(form.email) }}
+                </span>
+            </div>                        
+        </div>
+    </div>
+</div>
+ {# Section Start #}
+ <div class="page-subtitle margin-bottom-0">
+    <h3>Adresse</h3>
+    <p>Adresse de votre société.</p>
+</div>
+<div class="form-group-one-unit margin-bottom-40">
+    {# Row Start #}
+    <div class="row">
+        {# Address.Street #}
+        <div class="col-md-12">
+            <div class="form-group form-group-custom">
+                {{ form_label(form.address.street, "N° + Voirie") }}
+                {{ form_widget(form.address.street, {'attr': {'class': 'form-control', 'placeholder':'Ex : Rue de Paris ...'}}) }}
+                <span class="help-block">{{ form_errors(form.address.street) }}</span>                                            
+            </div>                        
+        </div>
+    </div>
+    {# Row Start #}
+    <div class="row">
+        {# Address.Additional Information #}
+        <div class="col-md-12">
+            <div class="form-group form-group-custom">
+                {{ form_label(form.address.additionalInformation, "Informations supplémentaires") }}
+                {{ form_widget(form.address.additionalInformation, {'attr': {'class': 'form-control', 'placeholder':'Ex: Batiment 5, 3ème étage ...'}}) }}
+                <span class="help-block">{{ form_errors(form.address.additionalInformation) }}</span>                                 
+            </div>                        
+        </div>
+    </div>
+    {# Row Start #}
+    <div class="row">
+        {# Address.Zip Code #}
+        <div class="col-md-4">
+            <div class="form-group form-group-custom">
+                {{ form_label(form.address.zipCode, "Code postal") }}
+                {{ form_widget(form.address.zipCode, {'attr': {'class': 'form-control', 'placeholder':'Ex : 75001'}}) }}
+                <span class="help-block">{{ form_errors(form.address.zipCode) }}</span>                                              
+            </div>                        
+        </div>
+        {# Address. City #}
+        <div class="col-md-8">
+            <div class="form-group form-group-custom">
+                {{ form_label(form.address.city, "Ville") }}
+                {{ form_widget(form.address.city, {'attr': {'class': 'form-control', 'placeholder':'Ex : Paris ...'}}) }}
+                <span class="help-block">{{ form_errors(form.address.city) }}</span>                                             
+            </div>                        
+        </div>
+    </div>                                                                                                 
+</div>
+{# Section End #}
+{# Save Button #}
+{{ form_widget(form.submit, {'label': 'Enregistrer', 'attr': {'class': 'btn btn-primary'}}) }}
+
+{{ form_rest(form) }}
+
+{{ form_end(form) }}
+</div>

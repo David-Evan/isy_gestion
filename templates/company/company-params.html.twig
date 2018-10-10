@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Gestion d'entreprise{% endblock %}
+
+{% block body %}
+    <!-- page title -->
+    <div class="page-title">
+        <h1>Gestion de vos paramètres</h1>
+        <p>Vous pouvez facilement accèder à vos parmètres d'entreprise, éditer vos coordonnées ou modifier vos préférences.</p>
+        <ul class="breadcrumb">
+            <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+            <li>Gestion d'entreprise</li>
+            <li>Vos paramètres</li>
+        </ul>
+    </div>
+
+    <div class="wrapper wrapper-white">                   
+            <div class="row row-wider">
+                <div class="col-md-12">
+                    {% include 'company/Form/user_company.html.twig' with {form:UserCompanyForm} only %}
+                </div>
+            </div>
+        </div>
+{% endblock %}

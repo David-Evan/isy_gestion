@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Entity\Product;
-use App\Form\ProductType;
+use App\Entity\{Product, UserCompany};
+use App\Form\{ProductType, UserCompanyType};
 
 class CompanyManagementController extends AbstractController
 {
@@ -89,5 +89,33 @@ class CompanyManagementController extends AbstractController
         $this->addFlash('info','Le produit a bien été supprimé.');
         
         return $this->redirectToRoute('company_product_list');
+    }
+
+    /**
+     * @Route("/company/options/", name="company_options", methods={"GET", "POST"})
+     */
+    public function companyParams(Request $request){
+
+        $userCompany = $this->getUser()->getCompany();
+
+        $form =  $this->createForm(UserCompanyType::class, $userCompany)
+                      ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        $entityManager = $this->getDoctrine()
+                              ->getManager();
+                              
+        $entityManager->persist($userCompany);
+        $entityManager->flush();
+
+        $this->addFlash('success','Votre société a bien été modifié !');
+
+            return $this->redirectToRoute('company_options');
+        }
+
+        return $this->render('company/company-params.html.twig', [
+            'UserCompanyForm' => $form->createView(),   
+        ]);
     }
 }

@@ -34,7 +34,8 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min = 3, max = 255)
+     * @Assert\Email()
+     * @Assert\NotBlank()
      */
     private $email;
 

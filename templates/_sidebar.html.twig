@@ -40,7 +40,7 @@
                 <a href="#"><i class="fa fa-cogs"></i><span>Gestion Entreprise</span></a>
                 <ul>
                     <li {% if ROUTE_NAME matches '{(company_product)}' %}class="active" {% endif %}><a href="{{ path('company_product_list') }}">Gestion des produits &amp; services</a></li>
-                    <li {% if ROUTE_NAME matches '{(company_options)}' %}class="active" {% endif %}><a href="#">Paramètres</a>
+                    <li {% if ROUTE_NAME matches '{(company_options)}' %}class="active" {% endif %}><a href="{{ path('company_options') }}">Paramètres</a>
                 </ul>
             </li>
         </ul>

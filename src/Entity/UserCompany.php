@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserCompanyRepository")
@@ -16,13 +17,16 @@ class UserCompany
      */
     private $id;
 
-    /**
+   /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 3, max = 255)
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email
+     * @Assert\NotBlank()
      */
     private $email;
 

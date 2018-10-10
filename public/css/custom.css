@@ -155,3 +155,26 @@ table a{
 .flash-info.alert{
     margin-bottom: 0;
 }
+
+/*  Profile detail dropzone */
+.profile-dropzone-container{
+    max-width: 200px;
+    min-height: 165px;
+    margin: auto;
+    display: none;
+}
+
+.dropzone .dz-preview, .dropzone-previews .dz-preview{
+    margin-left: 35px;
+}
+.dropzone .dz-preview .dz-details{
+    margin-bottom: 5px;
+}
+.dropzone a.dz-remove, 
+.dropzone-previews a.dz-remove,
+.dropzone .dz-preview .dz-details .dz-size,
+.dropzone-previews .dz-preview .dz-details .dz-size
+{
+    display: none;
+    
+}

@@ -896,10 +896,6 @@ $(window).resize(function(){
     dev_header_navigation.init();
 });
 
-
-/** Dev layout default **/
-"use strict";
-
 var dev_layout_alpha_settings = {
     unit: 5,
     headerHeight: $(".dev-page .dev-page-header").height(),

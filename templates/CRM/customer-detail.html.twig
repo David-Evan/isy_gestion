@@ -21,10 +21,15 @@
                     <div class="margin-top-10 margin-bottom-10 text-center">
                         <button type="button" class="btn btn-danger btn-sm _jQ-unlock-form"><span class="addon-lockable light-lock"><i class="fas fa-lock"></i></span> &nbsp; Éditer</button>
                     </div>
-                    <div class="profile margin-bottom-0">  
+                    <div class="profile margin-bottom-0">
+                        <div class="profile-dropzone-container">
+                            <form class="dropzone dropzone-mini" id="CustomerAvatarDropzone" action="{{ oneup_uploader_endpoint('customer_avatar') }}">
+                                <input type="hidden" name="_customer_ID" value="{{Customer.Id}}">
+                            </form>
+                        </div>
                         <div class="profile-image">
-                            <img src="
-                            {% if Customer.PictureURL is not empty %}{{Customer.PictureURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}
+                            <img id="CustomerAvatar" src="
+                            {% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}
                             "> 
                             {#<div class="profile-badges">
                                 <a href="#" class="profile-badges-left"><i class="fa fa-plus"></i></a>
@@ -46,7 +51,10 @@
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="js/plugins/dropzone/dropzone.min.js"></script>
+{# TINY MCE + Logic for editing customer #}
 <script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey={{_TinyMCE_APIKey}}'></script>
 <script type="text/javascript" src="js/dev-customer-form.js"></script>
+{# Dropzone + Logic for set picture #}
+<script type="text/javascript" src="js/plugins/dropzone/dropzone.min.js"></script>
+<script type="text/javascript" src="js/dev-customer-dropzone.js"></script>
 {% endblock %}

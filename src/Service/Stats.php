@@ -10,6 +10,9 @@ use App\Entity\{Customer};
  */
 class Stats 
 {
+    /**
+     * @var ManagerRegistry
+     */
     private $doctrine;
 
     public function __construct(Doctrine $doctrine)

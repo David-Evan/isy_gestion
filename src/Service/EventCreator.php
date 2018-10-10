@@ -11,11 +11,24 @@ use App\Entity\{EventType, Event, Customer, Quotation};
  */
 class EventCreator 
 {
+    /**
+     * @var ManagerRegisty
+     */
     private $doctrine;
     
+    /**
+     * @var string Event description (eg : user comment on customer)
+     */
     private $description;
+
+    /**
+     * @var string|int|float ... - additional Information to attach. eg : Quotation ID. 
+     */
     private $additionalInformation;
 
+    /**
+     * @var Quotation - You need to setQuotation before perform a creation of ADD/ACCEPT Quotation Type  
+     */
     private $quotation;
 
 

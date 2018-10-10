@@ -15,7 +15,9 @@ class Customer
     const 
         TYPE_INDIVIDUAL = 'individual',
         TYPE_PROFESSIONNAL = 'professionnal',
-        TYPE_PUBLIC = 'public_company';
+        TYPE_PUBLIC = 'public_company',
+
+        CUSTOMER_AVATAR_DIR = 'uploads/' ;
 
     /**
      * @ORM\Id()
@@ -67,7 +69,7 @@ class Customer
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $pictureURL;
+    private $avatarURL;
 
     /**
      * @ORM\Column(type="datetime")
@@ -170,14 +172,14 @@ class Customer
         return $this;
     }
 
-    public function getPictureURL(): ?string
+    public function getAvatarURL(): ?string
     {
-        return $this->pictureURL;
+        return $this->avatarURL;
     }
 
-    public function setPictureURL(?string $pictureURL): self
+    public function setAvatarURL(?string $avatarURL): self
     {
-        $this->pictureURL = $pictureURL;
+        $this->avatarURL = $avatarURL;
 
         return $this;
     }

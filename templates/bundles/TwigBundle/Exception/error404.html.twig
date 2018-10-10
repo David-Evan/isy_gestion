@@ -1,0 +1,32 @@
+{% extends 'base-lite.html.twig' %}
+
+{% block title %} {{ parent() }} - Erreur{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/custom-login.css">
+{% endblock %}
+
+{% block body %}
+<div class="dev-page dev-page-login dev-page-login-v2">
+    <div class="dev-page-error">
+        <div class="dev-page-error-block">
+            <div class="code">404</div>
+            <div class="title">Il semble que vous soyez perdu ...</div>
+            
+            <div class="buttons">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button onclick="history.back();" class="btn btn-primary btn-block"><i class="fa fa-angle-left pull-left"></i> Revenir en arrière</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="path('index')" class="btn btn-danger btn-block">Retour à l'accueil <i class="fa fa-angle-right pull-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="dev-page-login-block__footer">
+                &copy; {{ "now"|date("Y") }} <strong>ISY-Gestion</strong> Designed with ❤ by <a href="https://www.david-evan.fr" target="_blank">David Evan</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

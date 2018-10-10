@@ -42,3 +42,14 @@
     float: left;
     padding-left: 15px;
 }
+
+/* Error page */
+
+.dev-page-error .dev-page-error-block .code,
+.dev-page-error .dev-page-error-block .title{
+    color:#fff;
+}
+
+.dev-page-error a{
+    color:#fff;
+}

@@ -51,21 +51,3 @@
     </div>
 </div>
 {% endblock %}
-{#
-{% if Error %}
-    <div>{{ Error.messageKey|trans(Error.messageData, 'security') }}</div>
-{% endif %}
-
-<form action="{{ path('login') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ LastUserName}}" />
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
-
-    <input type="checkbox" id="remember_me" name="_remember_me" checked />
-    <label for="remember_me">Keep me logged in</label>
-
-    <button type="submit">login</button>
-</form>
-#}

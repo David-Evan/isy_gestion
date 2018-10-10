@@ -90,6 +90,10 @@ ul.nav.nav-tabs>li>a{
     font-size: 1.2em;
 }
 
+.profile .profile-image .profile-badges .profile-badges-left, .profile .profile-image .profile-badges .profile-badges-right{
+    font-size: 1.2em;   
+   }
+
 
 /** Color change for table-link **/
 

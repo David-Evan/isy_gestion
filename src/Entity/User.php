@@ -33,7 +33,8 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\OneToOne(targetEntity="App\Entity\UserCompany", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $company;
 
@@ -138,12 +139,12 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getCompany(): ?string
+    public function getCompany(): ?UserCompany
     {
         return $this->company;
     }
 
-    public function setCompany(string $company): self
+    public function setCompany(?UserCompany $company): self
     {
         $this->company = $company;
 

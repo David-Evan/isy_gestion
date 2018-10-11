@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\{Customer};
+
 class HomeController extends AbstractController
 {
     /**
@@ -13,8 +15,12 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $customer = $this->getDoctrine()
+                         ->getRepository(Customer::class)
+                         ->findAll([], ['dateCreate' => 'DESC'], 5);
+
         return $this->render('home/index.html.twig', [
-            
+            'LastCustomers' => $customer,
         ]);
     }
 

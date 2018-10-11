@@ -3,6 +3,9 @@
                          'professionnal': 'Entreprise',
                          'public_company': 'Service public'} 
 %}
+{% set CUSTOMER_COLOR = { 'individual': 'warning',
+                          'professionnal': 'success',
+                          'public_company': 'info'} %}
 {% set ROUTE_NAME = app.request.get('_route') %}
 <!DOCTYPE html>
 <html lang="fr">

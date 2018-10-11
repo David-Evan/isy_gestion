@@ -3,6 +3,233 @@
 {% block title %}{{ parent() }} - Tableau de bord {% endblock %}
 
 {% block body %}
+<div class="page-title">
+        <h1>Tableau de bord</h1>
+        <p><strong>ISY-Gestion est un outil open source de gestion d'entreprise. Retrouvez sur votre tableau de bord les principales informations concernant votre société.</strong></p>
+        
+        <ul class="breadcrumb">
+            <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+            <li>Tableau de bord</li>
+        </ul>
+    </div>
+<div class="row row-condensed">
+        <div class="col-lg-9 col-md-6">
+            
+            <div class="wrapper wrapper-white">
+                <div class="page-subtitle">
+                    <h2>Vos derniers clients</h2>
+                </div>                                                                                                                                                                             
 
+                 <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover text-center">
+                <tr>                 
+                    <th class="text-left"><i class="fas fa-user"></i> &nbsp; Client</th>
+                    <th class="text-left"><i class="fas fa-city"></i> &nbsp; Localisation</th>
+                    <th><i class="fas fa-user-tag"></i> &nbsp; Catégorie</th>
+                    <th>Actions</th>
+                </tr>
+                {% for Customer in LastCustomers %}
+                    <tr>          
+                        <td>                                                
+                            <div class="list-contacts list-contacts-inline">
+                                <strong>
+                                    <a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="list-contacts-item">
+                                        <img id="CustomerAvatar" src="{% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}">  {{Customer.name}}
+                                    </a>
+                                </strong>
+                            </div>
+                        </td>
+                        <td class="text-left">{{Customer.address.city}}</td>
+                        <td><span class="label label-{{CUSTOMER_COLOR[Customer.type]}}">{{CUSTOMER_TYPE[Customer.type]}}</td>
+                        <td><a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="btn btn-primary btn-rounded btn-clean">Voir</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+                
+            </div>
+            
+        </div>
+        <div class="col-lg-3 col-md-6 wrapper-white">
+            <div class="widget-tabbed margin-top-30">
+                <ul class="widget-tabs widget-tabs-three">
+                    <li class="active"><a href="#tasks">Tasks</a></li>                                        
+                    <li><a href="#activity"><i class="fas fa-plus"></i> &nbsp; Ajouter</a></li>                                        
+                </ul>                                    
+                <div class="widget-tab list-tasks active" id="tasks">
+                                                            
+                    <div class="list-tasks-item primary">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_1">
+                            <label for="task_1"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">The term is commonly used as a synonym for computers and computer networks</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">John Doe</a></div>
+                            <div class="date">13:30</div>
+                        </div>
+                    </div>
 
+                    <div class="list-tasks-item danger">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_2">
+                            <label for="task_2"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">Humans have been storing, retrieving, manipulating and communicating information</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Devin Stephens</a></div>
+                            <div class="date">11:22</div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-tasks-item danger">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_3">
+                            <label for="task_3"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">Based on the storage and processing technologies employed</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Kaitlynn Bowen</a></div>
+                            <div class="date">10:59</div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-tasks-item info">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_4">
+                            <label for="task_4"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">Devices have been used to aid computation for thousands of years</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Marissa George</a></div>
+                            <div class="date">10:48</div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-tasks-item warning active">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_1" checked="checked">
+                            <label for="task_1"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">The behaviour of troops in warfare varies considerably, both individually and as units or armies</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Philip Orlowsky</a></div>
+                            <div class="date">1 day ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-tasks-item danger active">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_5" checked="checked">
+                            <label for="task_5"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">In a business context, the Information Technology Association of America has defined information technology</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Darrell Wolfe</a></div>
+                            <div class="date">1 day ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-tasks-item primary active">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_6" checked="checked">
+                            <label for="task_6"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">The relational database model introduced a programming-language independent Structured Query Language</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Karen Spencer</a></div>
+                            <div class="date">1 day ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-tasks-item warning active">
+                        <div class="checkbox">
+                            <input type="checkbox" id="task_7" checked="checked">
+                            <label for="task_7"></label>
+                        </div>
+                        <div class="task">
+                            <a href="#">The field of information ethics was established by mathematician Norbert Wiener in the 1940s</a>
+                            <div class="user"><i class="fa fa-user"></i> <a href="#">Marissa George</a></div>
+                            <div class="date">2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-tab" id="activity">
+                                                            
+                    <ul class="timeline-simple">
+                        <li class="success">
+                            <span class="timeline-simple-date">12 min ago</span>
+                            The standard Lorem Ipsum passage, used since the 1500s
+                        </li>                                        
+                        <li class="success">
+                            <span class="timeline-simple-date">2h ago</span>
+                            Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+                        </li>
+                        <li class="info">
+                            <span class="timeline-simple-date">15h ago</span>
+                            1914 translation by H. Rackham
+                        </li>
+                        <li class="info">
+                            <span class="timeline-simple-date">19h ago</span>
+                            Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+                        </li>
+                        <li class="primary">
+                            <span class="timeline-simple-date">20h ago</span>
+                            Phasellus finibus ut libero sit amet gravida. Vivamus sed placerat sapien.
+                        </li>
+                        <li class="primary">
+                            <span class="timeline-simple-date">20h ago</span>
+                            Phasellus finibus ut libero sit amet gravida. Vivamus sed placerat sapien.
+                        </li>
+                        <li class="warning">
+                            <span class="timeline-simple-date">1 day ago</span>
+                            Curabitur vel ultrices arcu, ut vestibulum nulla. Vivamus tempor eros dolor.
+                        </li>
+                        <li class="warning">
+                            <span class="timeline-simple-date">2 day ago</span>
+                            Vivamus finibus diam in feugiat gravida. Sed dapibus malesuada condimentum.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+{#
+<div class="page-title">
+    <h1>Tableau de bord</h1>
+    <p>ISY-Gestion est un outil open source de gestion d'entreprise. Retrouvez sur votre tableau de bord les principales informations concernant votre société.</p>
+    
+    <ul class="breadcrumb">
+        <li><a href="{{path('homepage')}}">ISY-Gestion</a></li>
+        <li>Tableau de bord</li>
+    </ul>
+</div>
+#}
+{#        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover text-center">
+                <tr>                 
+                    <th class="text-left"><i class="fas fa-user"></i> &nbsp; Client</th>
+                    <th class="text-left"><i class="fas fa-city"></i> &nbsp; Localisation</th>
+                    <th><i class="fas fa-user-tag"></i> &nbsp; Catégorie</th>
+                    <th>Actions</th>
+                </tr>
+                {% for Customer in LastCustomers %}
+                    <tr>          
+                        <td>                                                
+                            <div class="list-contacts list-contacts-inline">
+                                <strong>
+                                    <a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="list-contacts-item">
+                                        <img id="CustomerAvatar" src="{% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}">  {{Customer.name}}
+                                    </a>
+                                </strong>
+                            </div>
+                        </td>
+                        <td class="text-left">{{Customer.address.city}}</td>
+                        <td><span class="label label-{{CUSTOMER_COLOR[Customer.type]}}">{{CUSTOMER_TYPE[Customer.type]}}</td>
+                        <td><a class="btn btn-primary btn-rounded btn-clean">Voir</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>   #}

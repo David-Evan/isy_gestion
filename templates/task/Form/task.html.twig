@@ -19,7 +19,7 @@
 <div class="row">
     <div class="form-group col-sm-10">
         {{ form_label(form.dateDue, "Date limite") }}
-        {{ form_widget(form.dateDue, {'attr': {'class': 'form-control datepicker', 'placeholder': "now"|date("d-m-Y") }}) }}
+        {{ form_widget(form.dateDue, {'attr': {'class': 'form-control datepicker', 'value': "now"|date("d-m-Y") }}) }}
         <span class="help-block">
             {{ form_errors(form.dateDue) }}
         </span> 

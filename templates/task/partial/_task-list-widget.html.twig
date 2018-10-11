@@ -39,7 +39,7 @@
                         <label for="task_{{Task.Id}}"></label>
                     </div>
                     <div class="task">
-                        <a href="#">{{Task.Description}}</a>
+                        <a href="#">{{Task.Description|nl2br}}</a>
                         <div class="user"><i class="fa fa-user"></i> <a href="#">{{Task.user.username}}</a></div>
                         <div class="date">
                             {# If task was created today, just display hour (eg : 13:30) else, display date ago filter (eg : 2 days ago ...) #}
@@ -52,17 +52,18 @@
                     </div>
                 </div>
             {% endfor %}
-        {% else %} {# Task list is empty #}
-            <div class="list-task no-task text-center margin-top-30">
-                <div class="no-task-smiley">
-                    <img src="img/smiley-zero-task.png" alt="Pas de tâche actives">
-                </div>
-                <div class="no-task-content page-title margin-top-10">
-                    <h3>Félicitation</h3>
-                    <p class="sub-title">Toutes vos tâches sont accomplies !</p>
-                </div>
-            </div>
         {% endif %}
+        {# Task list is empty #}
+        <div class="list-task no-task text-center margin-top-30" {% if TaskList is not empty %}style="display:none;"{% endif %}>
+            <div class="no-task-smiley">
+                <img src="img/smiley-zero-task.png" alt="Pas de tâche actives">
+            </div>
+            <div class="no-task-content page-title margin-top-10">
+                <h3>Félicitation</h3>
+                <p class="sub-title">Toutes vos tâches sont accomplies !</p>
+            </div>
+        </div>
+        
     </div>
     <div class="widget-tab" id="addTask">
         {% include 'task/Form/task.html.twig' with {form:AddTaskForm} only %}

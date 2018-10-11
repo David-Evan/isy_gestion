@@ -6,4 +6,4 @@ twig:
     globals:
         _TinyMCE_APIKey: '%env(TINYMCE_APIKEY)%'
         
-        _Stats: '@App\Service\Stats'
+        _Stats: '@App\Service\StatsFactory'

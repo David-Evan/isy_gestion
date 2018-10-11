@@ -45,4 +45,62 @@ class CustomerRepository extends ServiceEntityRepository
                         ->getQuery()
                         ->getSingleScalarResult();
     }
+
+    /**
+     * Return date + total customer
+     */
+    public function getTotalCustomerAddEachDay(int $days = 7){
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT DATE(date_create) AS period, 
+                COUNT(*) AS newCustomers 
+                FROM customer
+                WHERE DATE(date_create) > (NOW() - INTERVAL :days DAY)
+                GROUP BY DATE(date_create)';
+        ;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['days' => $days]);
+
+        /**
+         * You will get with this query a table for each day (last 7 days)
+         * 2018-10-11    5
+         * 2018-10-13    8
+         * yyyy-mm-dd
+         * 
+         * But no data for days with no results
+         */
+        $partialTable = $stmt->fetchAll();
+
+        $finalTable = [];
+        $today = date("Y-m-d");
+
+        // We start from the past : Last xx days. And Go to now with day + 1 (-1 from past) at each loop
+        for($i = $days ; $i >= 0 ; $i--)
+        {
+            $previousDay = date('Y-m-d', strtotime($today . '- '.$i.' day'));
+            $finalTable[] = ['period' => $previousDay, 'newCustomers' => 0];
+        }
+
+        foreach ($partialTable as $partialLine){
+
+            foreach($finalTable as $finalLineKey => $finalLineValue){
+                
+                if(isset($finalLineValue['period'])){
+                    
+                    if($partialLine['period'] == $finalLineValue['period']){
+                        
+                        $finalTable[$finalLineKey]['newCustomers'] = $partialLine['newCustomers'];
+                    }
+                }
+            }
+        }
+        /**
+         * Now, we have a table with empty value : eg :
+         *   2018-10-11    5
+         *   2018-10-12    0 
+         *   2018-10-13    8
+         */
+        return  $finalTable;
+    }
 }

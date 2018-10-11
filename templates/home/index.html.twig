@@ -2,6 +2,9 @@
 
 {% block title %}{{ parent() }} - Tableau de bord {% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+{% endblock %}
 {% block body %}
 
 <div class="page-title">
@@ -12,55 +15,106 @@
       <li>Tableau de bord</li>
    </ul>
 </div>
-
-<div class="row row-condensed">
-   <div class="col-lg-9 col-md-6">
-
-      <div class="wrapper wrapper-white">
-         {# START Last Customers Table#}
-         <div class="page-subtitle">
-            <h2>Quoi de neuf ?</h2>
-         </div>
-         <p>Voici vos derniers clients :</p>
-         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover text-center">
-               <tr>
-                  <th class="text-left"><i class="fas fa-user"></i> &nbsp; Client</th>
-                  <th class="text-left"><i class="fas fa-city"></i> &nbsp; Localisation</th>
-                  <th><i class="fas fa-user-tag"></i> &nbsp; Catégorie</th>
-                  <th>Actions</th>
-               </tr>
-               {% for Customer in LastCustomers %}
-               <tr>
-                  <td>
-                     <div class="list-contacts list-contacts-inline">
-                        <strong>
-                        <a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="list-contacts-item">
-                        <img id="CustomerAvatar" src="{% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}">  {{Customer.name}}
-                        </a>
-                        </strong>
-                     </div>
-                  </td>
-                  <td class="text-left">{{Customer.address.city}}</td>
-                  <td><span class="label label-{{CUSTOMER_COLOR[Customer.type]}}">{{CUSTOMER_TYPE[Customer.type]}}</td>
-                  <td><a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="btn btn-primary btn-rounded btn-clean">Voir</a></td>
-               </tr>
-               {% endfor %}
-            </table>
-         </div>
-         {# END Last Customers Table#}
-      </div>
-      
-   </div>
-   <div class="col-lg-3 col-md-6 wrapper-white">
-       {# START Task List #}
-            {{ render(controller('App\\Controller\\TaskController::getTaskList')) }}
-       {# END Task list #}
-   </div>
+    <div class="row row-condensed">
+        <div class="col-lg-9 col-md-6 padding-left-20 padding-right-20 padding-top-20 wrapper-white"> 
+            <div class="row">
+                <div class="col-md-6 padding-right-20">
+                    {# START : Panel Info #}
+                    <div class="panel panel-default panel-welcome">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fas fa-coffee"></i> &nbsp; Bienvenue sur ISY-Gestion </h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <strong>Bonjour à tous !</strong>
+                            </p>
+                            <p>
+                                Vous visitez actuellement une version encore en développement d'une plateforme de gestion de TPE. <a href="https://github.com/David-Evan/ISY-Gestion" target="_blank">Ce projet est totalement libre</a> et a été débuté lors de la fin de mon pacours de <strong>Développeur/Intégrateur Web</strong> chez Open classrooms.
+                            </p>
+                            <p>
+                                Au delà d'un projet de fin d'étude, ce <strong>prototype</strong> est surtout un formidale laboratoire de test pour mes idées et/ou futurs projets.
+                            </p>
+                            <p>
+                                <h5>Aperçu des fonctionnalités à venir</h5>
+                                <ul>
+                                    <li>Intégration d'une <strong>section ERP</strong> pour la facturation.</li>
+                                    <li>Réalisation d'un module de <strong>création de devis en Drap&amp;Drop.</strong></li>
+                                    <li>Développement des <em>"Deals"</em> ...</li>
+                                    <li>Création d'une section "agenda" &amp; "rendez-vous". </li>
+                                    <li>Support multi-utilisateur.</li>
+                                    <li>Et bien plus encore ...</li>
+                                </ul>
+                            </p>
+                            <p class="pull-right"><img src="img/logo-mini.png" alt="mini-logo" /></p>
+                            <p><strong>Enjoy &nbsp;<i class="far fa-smile-beam" style="font-size:18px;"></i></strong></p>
+                        </div>
+                    </div>
+                    {# END : Panel Info #}
+                </div>
+                <div class="col-md-6">
+                    {# START : New customers Charts #}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fas fa-user-plus"></i> &nbsp; Acquisition clientèle sur les 7 derniers jours</h3>
+                        </div>
+                        <div class="panel-body" style="max-height:382px;">
+                            <div id="loader_newCustomerChart" class="lds-new-customers-chart lds-ring"><div></div><div></div><div></div><div></div></div>
+                            <div id="_newCustomersChart" data-stats-url="{{path('stats_new_customers')}}" style="min-height:350px;">
+                            </div>
+                        </div>
+                    </div>
+                    {# END : Charts #}
+                </div>
+            </div>
+            <div class="row">     
+                {# START : Last Customers Table #}
+                <div class="page-subtitle">
+                    <h3>&nbsp; <i class="far fa-building"></i> &nbsp; Vos derniers ajouts clients</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover text-center">
+                    <tr>
+                        <th class="text-left"><i class="fas fa-user"></i> &nbsp; Client</th>
+                        <th class="text-left"><i class="fas fa-city"></i> &nbsp; Localisation</th>
+                        <th><i class="fas fa-user-tag"></i> &nbsp; Catégorie</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for Customer in LastCustomers %}
+                    <tr>
+                        <td>
+                            <div class="list-contacts list-contacts-inline">
+                                <strong>
+                                <a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="list-contacts-item">
+                                <img id="CustomerAvatar" src="{% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}">  {{Customer.name}}
+                                </a>
+                                </strong>
+                            </div>
+                        </td>
+                        <td class="text-left">{{Customer.address.city}}</td>
+                        <td><span class="label label-{{CUSTOMER_COLOR[Customer.type]}}">{{CUSTOMER_TYPE[Customer.type]}}</td>
+                        <td><a href="{{path('crm_customer_view', {'id':Customer.Id})}}" class="btn btn-primary btn-rounded btn-clean">Voir</a></td>
+                    </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+                {# END Last Customers Table #}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            {# START Task List #}
+                    {{ render(controller('App\\Controller\\TaskController::getTaskList')) }}
+            {# END Task list #}
+        </div>
 </div>
+
 {% endblock %}
 {% block javascripts %}
 <script type="text/javascript" src="js/plugins/moment/moment.js"></script>
 <script type="text/javascript" src="js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 <script type="text/javascript" src="js/dev-task.js"></script>
+<script type="text/javascript" src="js/dev-charts.js"></script>
 {% endblock %}

@@ -18,7 +18,7 @@ class HomeController extends AbstractController
         // Customer Widget
         $customer = $this->getDoctrine()
                          ->getRepository(Customer::class)
-                         ->findAll([], ['dateCreate' => 'DESC'], 5);
+                         ->findBy([], ['dateCreate' => 'DESC'], 5);
 
         return $this->render('home/index.html.twig', [
             'LastCustomers' => $customer,

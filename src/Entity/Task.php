@@ -25,6 +25,12 @@ class Task
     private $description;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
+     */
+    private $completed = false;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\Datetime
      */
@@ -37,7 +43,7 @@ class Task
     private $dateCreate;
 
     /**
-    * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+    * @ORM\ManyToOne(targetEntity="App\Entity\User")
     * @ORM\JoinColumn(nullable=false)
     */
     private $user;
@@ -95,6 +101,18 @@ class Task
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(bool $completed): self
+    {
+        $this->completed = $completed;
 
         return $this;
     }

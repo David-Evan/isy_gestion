@@ -4,7 +4,7 @@
 {# Forms errors #}
 {{ form_errors(form) }}
 <div class="form-group">
-    {{ form_label(form.comment) }}
+    {{ form_label(form.comment, "Commentaire") }}
     {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'placeholder':'Message à ajouter ...', 'rows':3 }}) }}
     <span class="help-block">
         &nbsp; &nbsp; Min : 3 - Max 1.500 caractères.

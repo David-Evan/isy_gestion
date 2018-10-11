@@ -6,9 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\{Customer, Address, EventType, Event, CustomerComment};
-
 use App\Form\{CustomerType, CustomerCommentType};
-
 use App\Service\EventCreator;
 
 class CRMController extends AbstractController
@@ -160,6 +158,7 @@ class CRMController extends AbstractController
 
         $eventCreator->setDescription($customerComment->getComment());
         $eventCreator->createEvent($customer, EventType::TYPE_COMMENT_ADD);
+        
         $this->addFlash('success','Votre information a été ajoutée !');
 
         return $this->redirectToRoute('crm_customer_view', ['id' => $customer->getId()]);

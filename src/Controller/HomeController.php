@@ -14,7 +14,8 @@ class HomeController extends AbstractController
      * @Route("/home", name="homepage")
      */
     public function index()
-    {
+    {   
+        // Customer Widget
         $customer = $this->getDoctrine()
                          ->getRepository(Customer::class)
                          ->findAll([], ['dateCreate' => 'DESC'], 5);

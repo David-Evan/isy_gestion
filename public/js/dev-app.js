@@ -397,7 +397,7 @@ var dev_forms = {
             $(".datetimepicker").datetimepicker();
         
         if($(".datepicker").length > 0)
-            $(".datepicker").datetimepicker({format: "MM/DD/YYYY"});
+            $(".datepicker").datetimepicker({format: "DD/MM/YYYY"});
         
         if($(".timepicker").length > 0)
             $(".timepicker").datetimepicker({format: "HH:mm"});
@@ -822,7 +822,12 @@ var isy_gestion = {
 
         // Add WYSIWYG 
         this.addTinyMCEEditor();
+        
+        // Confirm box
         this.addConfirmBoxBeforeRemove();
+
+        // Tooltips
+        this.enableToolTips();
     },
 
     displayDate: function(){
@@ -866,6 +871,10 @@ var isy_gestion = {
         $("._jQConfirm-before-remove").on("click", function(e){
             return confirm('Cet élément va être supprimé définitivement. \n\n Êtes-vous certain de vouloir supprimer cet élément ?');
         });
+    },
+
+    enableToolTips : function () {
+        $('[data-toggle="tooltip"]').tooltip();
     }
 };
 

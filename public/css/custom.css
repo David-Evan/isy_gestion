@@ -182,3 +182,48 @@ table a{
     display: none;
     
 }
+
+/* Update Task list (invert color)*/
+.list-tasks .list-tasks-item:hover, 
+.list-tasks .list-tasks-item.active,
+.widget-tabbed .widget-tabs>li.tab-task
+{
+    background-color: #fafafa;
+}
+.list-tasks .list-tasks-item,
+.widget-tabbed .widget-tabs>li.tab-task.active>a,
+.widget-tab.active
+{
+    background-color: #fff;
+}
+
+.task{
+    padding-right: 20px;
+}
+
+.task .date{
+    position: relative;
+    left: 15px;
+}
+
+.list-tasks-item:hover .btn.btn-delete-task{
+    opacity: 1;
+    transition: 0.6s;
+}
+.btn.btn-delete-task{
+    font-size: 1.1em;
+    line-height: 15px;
+    padding: 5px 9px 5px 9px;
+    opacity: 0;
+}
+
+.delete-task{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+/* Used to put white space on tooltip*/
+.tooltip-inner {
+    white-space:pre-wrap;
+}

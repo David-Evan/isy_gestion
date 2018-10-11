@@ -1,0 +1,70 @@
+{# This is task list complet widget #}
+{# item : primary | info  - warning - danger #}
+<div class="widget-tabbed margin-top-30">
+    <ul class="widget-tabs widget-tabs-three">
+        <li class="tab-task active"><a href="#tasks">Mes rappels</a></li>
+        <li class="tab-task"><a href="#addTask"><i class="fas fa-plus"></i> &nbsp; Ajouter</a></li>
+    </ul>
+    {# TAB : Task #}
+    <div class="widget-tab list-tasks active" id="tasks">
+        {% if TaskList is not empty %}
+            {% for Task in TaskList %}
+                
+            {# -------- #}
+                {# Create today & simpleDateDue (only day-month-year) var #}
+                {% set today = date('now')|date('d-m-Y') %}
+                {% set simpleDateDue = date(Task.DateDue)|date('d-m-Y') %}
+
+                {# Choose a status color depending on due Date terms : Passed : danger - Today : warning - other : info#}
+                {% if date(simpleDateDue) == date(today)  %}
+                    {% set _Task_status = 'warning' %}
+                {% elseif date(simpleDateDue) < date(today) %}
+                    {% set _Task_status = 'danger' %}
+                {% else %}
+                    {% set _Task_status = 'info' %}
+                {% endif %}
+                {# -------- #}
+
+                <div class="list-tasks-item {{_Task_status}} {% if Task.Completed %}active{% endif %}" data-toggle="tooltip" data-placement="left" 
+{# DO NOT TOUCH INDENT (Used to display new line on tooltip #}
+                title="Date limite : 
+{{Task.DateDue|date("d / m / Y")}}">
+                    <input type="hidden" class="_jQ_URL_ChangeStatus" value="{{path('task_update_status', {'id':Task.Id})}}">
+                    <div class="delete-task">
+                        <a class="btn btn-xs btn-danger btn-clean btn-delete-task _jQConfirm-before-remove"><i class="fas fa-times"></i></a>
+                        <input type="hidden" class="_jQ_URL_Delete" value="{{path('task_delete', {'id':Task.Id})}}">
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="task_{{Task.Id}}" {% if Task.Completed %}checked{% endif %}>
+                        <label for="task_{{Task.Id}}"></label>
+                    </div>
+                    <div class="task">
+                        <a href="#">{{Task.Description}}</a>
+                        <div class="user"><i class="fa fa-user"></i> <a href="#">{{Task.user.username}}</a></div>
+                        <div class="date">
+                            {# If task was created today, just display hour (eg : 13:30) else, display date ago filter (eg : 2 days ago ...) #}
+                            {% if Task.DateCreate < date(today) %}
+                                {{Task.DateCreate|ago}}
+                            {% else %}
+                                {{Task.DateCreate|date('H:m')}}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %} {# Task list is empty #}
+            <div class="list-task no-task text-center margin-top-30">
+                <div class="no-task-smiley">
+                    <img src="img/smiley-zero-task.png" alt="Pas de tâche actives">
+                </div>
+                <div class="no-task-content page-title margin-top-10">
+                    <h3>Félicitation</h3>
+                    <p class="sub-title">Toutes vos tâches sont accomplies !</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="widget-tab" id="addTask">
+        {% include 'task/Form/task.html.twig' with {form:AddTaskForm} only %}
+    </div>
+</div>

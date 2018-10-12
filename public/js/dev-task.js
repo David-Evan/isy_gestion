@@ -26,8 +26,11 @@ $(function(){
     });
 
     // Update Status function
-    $('div.list-tasks-item').on('click', function(){
-        
+    $('div.list-tasks-item').on('click', function(event){
+        // This line prevent both event on label and on checkbox.
+        if (event.target.tagName.toUpperCase() === "LABEL") {
+            return;
+          }
         let APIUrl = $(this).children('._jQ_URL_ChangeStatus').val();
 
         // Call API to update task status

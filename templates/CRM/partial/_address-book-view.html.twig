@@ -1,0 +1,22 @@
+{% for Customer in Customers %}
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="profile">
+            <div class="profile-image">
+                <img src="{% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}"> 
+                {#<div class="profile-badges">
+                    <a href="#" class="profile-badges-left"><i class="fa fa-business-time"></i> 245 €</a>
+                    <a href="#" class="profile-badges-right"><i class="fa fa-file-invoice-dollar"></i> 10 247 €</a>
+                </div>#}
+            </div>
+            <div class="profile-info">
+                <h4>{{Customer.name}}</h4>
+                <span><i class="fas fa-map-marker"></i> {{Customer.address.street}}, {{Customer.address.City|upper}}</span>
+            </div>
+            <div class="profile-buttons">
+                <a href="{{ path('crm_customer_view', {'id': Customer.id}) }}" class="btn btn-primary btn-clean btn-rounded"><i class="fa fa-info"></i></a>
+                    &nbsp; 
+                <a href="tel:{{Customer.phone}}" class="btn btn-success btn-clean btn-rounded"><i class="fa fa-phone"></i></a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

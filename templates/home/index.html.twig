@@ -58,9 +58,8 @@
                             <h3 class="panel-title"><i class="fas fa-user-plus"></i> &nbsp; Acquisition clientèle sur les 7 derniers jours</h3>
                         </div>
                         <div class="panel-body" style="max-height:382px;">
-                            <div id="loader_newCustomerChart" class="lds-new-customers-chart lds-ring"><div></div><div></div><div></div><div></div></div>
-                            <div id="_newCustomersChart" data-stats-url="{{path('stats_new_customers')}}" style="min-height:350px;">
-                            </div>
+                            <div id="_jQ_loader_newCustomerChart" class="lds-new-customers-chart lds-ring"><div></div><div></div><div></div><div></div></div>
+                            <div id="_jQ_newCustomersChart" data-stats-url="{{path('stats_new_customers')}}" style="min-height:350px;"></div>
                         </div>
                     </div>
                     {# END : Charts #}

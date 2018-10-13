@@ -3,7 +3,7 @@
 {% block title %}CRM - Carnet d'adresse{% endblock %}
 
 {% block body %}
-<div class="page-title">
+<div class="page-title wrapper-white">
     <h1>Carnet d'adresse</h1>
     <p>Retrouvez tous vos contacts, clients, et prospects, et accéder à leurs détails.</p>
     <ul class="breadcrumb">
@@ -12,43 +12,55 @@
         <li>Détail du client</li>
     </ul>
 </div>
-<div class="wrapper wrapper-white">
-    <div class="page-subtitle text-center margin-bottom-20">
-        <p><a href="{{path('crm_customer_add')}}" class="btn btn-success"><i class="fas fa-user-plus"></i> Ajouter un contact</a></p>
-    </div>    
+{# START : Search section #}
+<div class="wrapper">
     <div class="row">
-        {% for Customer in Customers %}
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="profile">
-                    <div class="profile-image">
-                        <img src="{% if Customer.AvatarURL is not empty %}{{Customer.AvatarURL}}{% else %}{{Customer.Email|gravatar}}{% endif %}"> 
-                        {#<div class="profile-badges">
-                            <a href="#" class="profile-badges-left"><i class="fa fa-business-time"></i> 245 €</a>
-                            <a href="#" class="profile-badges-right"><i class="fa fa-file-invoice-dollar"></i> 10 247 €</a>
-                        </div>#}
+        <div class="col-md-6 col-md-offset-3">                                    
+            <div class="page-subtitle page-subtitle-centralized">
+                <h3>Rerchercher un client</h3>
+                <p>Vous pouvez utiliser cet outil pour retrouver facilement un client grâce à son nom/email</p>                                        
+            </div>
+            <form id="_jQ_SearchForm">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input id="_jQ_SearchField" type="text" class="form-control light-control" placeholder="Recherche ..." required>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
                     </div>
-                    <div class="profile-info">
-                        <h4>{{Customer.name}}</h4>
-                        <span><i class="fas fa-map-marker"></i> {{Customer.address.street}}, {{Customer.address.City|upper}}</span>
-                    </div>
-                    <div class="profile-buttons">
-                        <a href="{{ path('crm_customer_view', {'id': Customer.id}) }}" class="btn btn-primary btn-clean btn-rounded"><i class="fa fa-info"></i></a>
-                            &nbsp; 
-                        <a href="tel:{{Customer.phone}}" class="btn btn-success btn-clean btn-rounded"><i class="fa fa-phone"></i></a>
+                    <div class="text-center margin-top-10">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-        </div>
-        <div class="pull-right">
-            <ul class="pagination">
-                {% for p in range(1, NbPages) %}
-                <li{% if p == Page %} class="active"{% endif %}>
-                    <a href="{{ path('crm_addressbook', {'page': p}) }}">{{ p }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+            </form>
+        </div>                                
     </div>
+</div>
+{# END : Search section #}
+<div class="wrapper wrapper-white">    
+    <div class="row">
+        <div class="page-subtitle text-center margin-bottom-20">
+            <p><a href="{{path('crm_customer_add')}}" class="btn btn-success"><i class="fas fa-user-plus"></i> Ajouter un contact</a></p>
 
+            {# loader for searching #}
+            <div id="_jQ_loader_searchAddressBook" class="lds-search-address-book lds-ring" style="display:none"><div></div><div></div><div></div><div></div></div>
+        </div>
+            <div id="_jQ_AddressBook">
+                {% include "CRM/partial/_address-book-view.html.twig" with {Customers:Customers} only %}
+            </div>
+    </div>
+    <div class="pull-right">
+        <ul class="pagination">
+            {% for p in range(1, NbPages) %}
+            <li{% if p == Page %} class="active"{% endif %}>
+                <a href="{{ path('crm_addressbook', {'page': p}) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="js/dev-address-book.js"></script>
 {% endblock %}

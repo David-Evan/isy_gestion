@@ -192,4 +192,21 @@ class CRMController extends AbstractController
             'Page'        => $page,
             ]);
     }
+
+    /**
+     * Return a partial view of addressbook used to show result.
+     * 
+     * @Route("/crm/address-book/search/{pattern}", name="crm_addressbook_search", 
+     *                                              methods={"GET"})
+     */
+    public function addressBookSearch($pattern)
+    {
+        $customers = $this->getDoctrine()
+                          ->getRepository(Customer::class)
+                          ->getCustomersLike($pattern);
+
+        return $this->render('CRM/partial/_address-book-view.html.twig', [
+            'Customers' => $customers
+        ]);
+    }
 }

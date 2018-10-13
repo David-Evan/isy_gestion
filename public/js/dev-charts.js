@@ -2,14 +2,14 @@
  * Ajax query load chart.
  */
 $(function(){
-let newCustomerStatsURL = $('#_newCustomersChart').data('statsUrl');
+let newCustomerStatsURL = $('#_jQ_newCustomersChart').data('statsUrl');
 $.get( newCustomerStatsURL, function( jsonData ) {
     // Remove later
     console.log('Query success, this is your chart data : ');
     console.log(jsonData);
 
     new Morris.Line({
-        element: '_newCustomersChart',
+        element: '_jQ_newCustomersChart',
         
         data: jsonData,
         lineColors: ['#b0d1a1'],
@@ -29,6 +29,6 @@ $.get( newCustomerStatsURL, function( jsonData ) {
       });
 
       // Remove loader
-      $('#loader_newCustomerChart').remove();
+      $('#_jQ_loader_newCustomerChart').remove();
   });
 });

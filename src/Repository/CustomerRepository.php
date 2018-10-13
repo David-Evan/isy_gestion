@@ -22,6 +22,7 @@ class CustomerRepository extends ServiceEntityRepository
 
     /**
      * Get all customer (paginated)
+     * @return Paginator
      */
     public function getAddressBookCustomers(int $page, int $nbPerPage = 12)
     {
@@ -37,6 +38,7 @@ class CustomerRepository extends ServiceEntityRepository
 
     /**
      * Get total customers number (count)
+     * @return int $totalCustomer
      */
     public function getTotalCustomers()
     {
@@ -47,9 +49,12 @@ class CustomerRepository extends ServiceEntityRepository
     }
 
     /**
-     * Return date + total customer
+     * Return date + total customer for each previous 
+     * @param int $days
+     * @return array('date' => 'YYYY-MM-DD', 'newCustomers' => 'int')
      */
-    public function getTotalCustomerAddEachDay(int $days = 7){
+    public function getTotalCustomerAddEachDay(int $days = 7)
+    {
 
         $conn = $this->getEntityManager()->getConnection();
 
@@ -102,5 +107,20 @@ class CustomerRepository extends ServiceEntityRepository
          *   2018-10-13    8
          */
         return  $finalTable;
+    }
+
+    /**
+     * Return all customer like matched pattern (LIKE '%pattern%')
+     *  - Looking only into email / name
+     * @return CustomersCollection
+     */
+    public function getCustomersLike($pattern)
+    {
+        return $this->createQueryBuilder('c')
+                    ->where('c.email LIKE :pattern')
+                    ->orWhere('c.name LIKE :pattern')
+                    ->setParameter('pattern', '%'.$pattern.'%')
+                    ->getQuery()
+                    ->getResult();
     }
 }

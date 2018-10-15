@@ -13,5 +13,9 @@ var avatarCustomerDropzone = new Dropzone("form#CustomerAvatarDropzone", {
         div_avatarCustomer.toggle();
         div_AvatarDropzone.toggle();
         avatarCustomerDropzone.removeAllFiles( true );
+
+        // Log success
+        console.log('Customer image have been successfully updated. Path :')
+        console.log(response.uploadFileURL)
     }
 });

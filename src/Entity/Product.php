@@ -40,13 +40,13 @@ class Product
      * @ORM\Column(type="float")
      * @Assert\Type("float")
      */
-    private $tax;
+    private $tax = 20;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\Length(min = 1, max = 50)
      */
-    private $units;
+    private $units = 'pièces';
 
     /**
      * @ORM\Column(type="float")

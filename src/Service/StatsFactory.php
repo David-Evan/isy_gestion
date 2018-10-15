@@ -21,9 +21,14 @@ class StatsFactory
      */
     private $doctrine;
 
+    private $newCustomersStats_CacheFilePath;
+
     public function __construct(Doctrine $doctrine)
     {
         $this->doctrine = $doctrine;
+
+        $today = new \DateTime();
+        $this->newCustomersStats_CacheFilePath = self::CACHE_DIR.'newCustomers-'.$today->format('Y-m-d').'.cache';
     }
 
     /**
@@ -41,39 +46,35 @@ class StatsFactory
      */
     public function getNewCustomersForPreviousDays(int $days = 7) : ?array {
         
-        $today = new \DateTime();
-        $cacheFileName = 'newCustomers-'.$today->format('Y-m-d').'.cache';
+        
 
-        if(file_exists(self::CACHE_DIR.$cacheFileName))
-            return $this->readCacheFile($cacheFileName);
+        if(file_exists($this->newCustomersStats_CacheFilePath))
+            return $this->readCacheFile($this->newCustomersStats_CacheFilePath);
 
         $data = $this->doctrine->getRepository(Customer::class)
                                ->getTotalCustomerAddEachDay($days);
         
-        $this->createCacheFile($cacheFileName, $data);
+        $this->createCacheFile($this->newCustomersStats_CacheFilePath, $data);
         return $data;
     }
 
     public function createCacheFile($fileName, $data){
         $fileSystem = new Filesystem();
-     
-        if(!$fileSystem->exists(self::CACHE_DIR))
-        {
-            try {
-                $fileSystem->mkdir(self::CACHE_DIR);
-            } 
-            catch (IOExceptionInterface $exception) {
-                echo "An error occurred while creating your directory at ".$exception->getPath();
-            }
-        }
 
-        $fileSystem->dumpFile(self::CACHE_DIR.$fileName, serialize($data));
+        $fileSystem->dumpFile($fileName, serialize($data));
 
     }
 
     public function readCacheFile($fileName){
-        $data = file_get_contents(self::CACHE_DIR.$fileName);
+        $data = file_get_contents($fileName);
 
         return unserialize($data);
+    }
+
+    public function destroyCacheFileNewCustomersStats(){
+        $fileSystem = new Filesystem();
+
+        if($fileSystem->exists($this->newCustomersStats_CacheFilePath))
+            $fileSystem->remove($this->newCustomersStats_CacheFilePath);
     }
 }

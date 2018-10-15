@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\{Customer, Address, EventType, Event, CustomerComment};
 use App\Form\{CustomerType, CustomerCommentType};
-use App\Service\EventCreator;
+use App\Service\{EventCreator, StatsFactory};
 
 class CRMController extends AbstractController
 {
@@ -101,7 +101,7 @@ class CRMController extends AbstractController
     /**
      * @Route("/crm/customers/add", name="crm_customer_add", methods={"GET", "POST"})
      */
-    public function customerAdd(Request $request, EventCreator $eventCreator)
+    public function customerAdd(Request $request, EventCreator $eventCreator, StatsFactory $statsFactory)
     {
         $customer = new Customer();
         $form =  $this->createForm(CustomerType::class, $customer)
@@ -116,6 +116,7 @@ class CRMController extends AbstractController
             $entityManager->flush();
 
             $eventCreator->createEvent($customer, EventType::TYPE_CUSTOMER_ADD);
+            $statsFactory->destroyCacheFileNewCustomersStats();
 
             $this->addFlash('success','Le client a bien été ajouté !');
 
@@ -127,21 +128,6 @@ class CRMController extends AbstractController
             ]);
     }
     
-    /**
-     * @Route("/crm/customers/delete/{id}", name="crm_customer_delete", requirements={"id"="\d+"}, methods={"GET"})
-     */
-    public function customerDelete(Customer $customer)
-    {
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($customer);
-        $entityManager->flush();
-
-        $this->addFlash('info','Le client / prospect a bien été supprimé.');
-        
-        return $this->redirectToRoute('crm_customer_list');
-    }
-
     /**
      * @Route("/crm/customers/add-comment/{id}", name="crm_customer_add_comment", requirements={"id"="\d+"}, methods={"POST"})
      */
